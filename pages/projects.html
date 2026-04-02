@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projeler | Sefa Benli</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .page-hero {
+      min-height:42vh; background:var(--dark-bg);
+      display:flex; align-items:center;
+      padding:130px 24px 70px;
+      position:relative; overflow:hidden;
+    }
+    .page-hero-bg { position:absolute; inset:0; pointer-events:none; }
+    .ph-shape { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.15; }
+    .ph-shape-1 { width:400px;height:400px; background:var(--accent); top:-150px;left:-80px; }
+    .ph-shape-2 { width:250px;height:250px; background:#3b82f6; bottom:-80px;right:10%; }
+    .page-hero-content { max-width:1200px; margin:0 auto; width:100%; z-index:1; }
+    .page-breadcrumb { font-size:0.78rem;color:var(--text-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px; }
+    .page-breadcrumb a { color:var(--accent-2);transition:color 0.3s; }
+    .page-breadcrumb a:hover { color:#fff; }
+    .page-breadcrumb i { font-size:0.6rem; }
+    .page-hero h1 { font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:#fff;margin-bottom:14px;animation:heroReveal 0.7s ease both 0.1s; }
+    .page-hero h1 .highlight { background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .page-hero p { font-size:1rem;color:var(--text-muted);max-width:520px;animation:heroReveal 0.7s ease both 0.25s; }
+    @keyframes heroReveal { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Projects page specific */
+    .projects-page { background:var(--light-bg); padding:90px 0; }
+
+    .projects-filter {
+      display:flex; justify-content:center;
+      gap:12px; margin-bottom:52px; flex-wrap:wrap;
+    }
+    .filter-btn {
+      padding:9px 24px; border-radius:50px;
+      border:2px solid var(--border-light);
+      background:var(--light-surface);
+      color:var(--text-light-m);
+      font-size:0.85rem; font-weight:600;
+      cursor:pointer; transition:var(--transition);
+      font-family:inherit;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#fff;
+      box-shadow:0 4px 16px var(--accent-glow);
+    }
+
+    .projects-page-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:28px;
+    }
+    @media(max-width:1024px){ .projects-page-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:600px){ .projects-page-grid{grid-template-columns:1fr;} }
+
+    .project-card { background:var(--light-surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border-light);transition:var(--transition);display:flex;flex-direction:column; }
+    .project-card:hover { transform:translateY(-8px);box-shadow:0 20px 50px rgba(110,64,201,0.15);border-color:rgba(110,64,201,0.3); }
+    .project-card.hidden { display:none; }
+
+    .project-img {
+      height:160px;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .project-img::before { content:'';position:absolute;inset:0;background:rgba(0,0,0,0.15); }
+    .project-img::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.18) 50%,transparent 60%);
+      transform:translateX(-100%); pointer-events:none;
+    }
+    .project-card:hover .project-img::after { transform:translateX(100%); transition:transform 0.55s ease; }
+
+    .pi-web    { background:linear-gradient(135deg,#6e40c9 0%,#3b82f6 100%); }
+    .pi-python { background:linear-gradient(135deg,#3572A5 0%,#1d6fa4 100%); }
+    .pi-java   { background:linear-gradient(135deg,#b07219 0%,#e05c1a 100%); }
+    .pi-other  { background:linear-gradient(135deg,#444 0%,#888 100%); }
+
+    .project-icon { font-size:3rem;color:rgba(255,255,255,0.9);z-index:1; }
+    .project-body { padding:24px;flex:1;display:flex;flex-direction:column; }
+    .project-tags { display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px; }
+    .ptag { font-size:0.7rem;font-weight:600;padding:3px 10px;border-radius:50px;background:rgba(110,64,201,0.1);color:var(--accent);border:1px solid rgba(110,64,201,0.2); }
+    .project-body h3 { font-size:1.05rem;font-weight:700;color:var(--text-light);margin-bottom:10px; }
+    .project-body p { font-size:0.85rem;color:var(--text-light-m);line-height:1.7;flex:1;margin-bottom:20px; }
+    .project-links { display:flex;gap:12px; }
+    .plink { display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:600;color:var(--text-light-m);padding:7px 16px;border-radius:50px;border:1.5px solid var(--border-light);transition:var(--transition); }
+    .plink:hover { border-color:var(--accent);color:var(--accent); }
+    .plink-live { background:var(--accent);border-color:var(--accent);color:#fff; }
+    .plink-live:hover { background:#5c35a8;border-color:#5c35a8;color:#fff; }
+
+    /* Featured project */
+    .featured-section { background:var(--dark-surface); padding:80px 0; }
+    .featured-card {
+      background:var(--dark-card); border:1px solid var(--border-dark);
+      border-radius:var(--radius); padding:36px;
+      display:grid; grid-template-columns:1fr 1fr; gap:40px;
+      align-items:center;
+    }
+    @media(max-width:768px){ .featured-card{grid-template-columns:1fr;} }
+    .featured-badge {
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(110,64,201,0.15); border:1px solid rgba(110,64,201,0.3);
+      border-radius:50px; padding:6px 14px;
+      font-size:0.75rem; font-weight:600; color:var(--accent-2);
+      margin-bottom:16px;
+    }
+    .featured-card h3 { font-size:1.6rem;font-weight:800;color:var(--text-dark);margin-bottom:14px; }
+    .featured-card p  { color:var(--text-muted);font-size:0.95rem;line-height:1.8;margin-bottom:24px; }
+    .featured-visual {
+      height:260px; border-radius:var(--radius);
+      background:linear-gradient(135deg,var(--accent),var(--accent-2),#3b82f6);
+      display:flex; align-items:center; justify-content:center;
+      font-size:5rem; color:rgba(255,255,255,0.9);
+      position:relative; overflow:hidden;
+    }
+    .featured-visual::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.15),transparent 60%);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">SB<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">Hakkımda</a></li>
+        <li><a href="skills.html">Beceriler</a></li>
+        <li><a href="projects.html" class="active">Projeler</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="services.html">Hizmetler</a></li>
+        <li><a href="contact.html">İletişim</a></li>
+      </ul>
+      <div class="nav-auth">
+        <a href="login.html" class="nav-btn-login">Giriş Yap</a>
+        <a href="register.html" class="nav-btn-register">Kayıt Ol</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <div class="ph-shape ph-shape-1"></div>
+      <div class="ph-shape ph-shape-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="page-breadcrumb">
+        <a href="../index.html">Ana Sayfa</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Projeler</span>
+      </div>
+      <h1>Benim <span class="highlight">Projelerim</span></h1>
+      <p>Geliştirdiğim projeler — web, Python ve Java çalışmalarım.</p>
+    </div>
+  </section>
+
+  <!-- ÖNE ÇIKAN PROJE -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-header light" style="margin-bottom:40px">
+        <span class="section-tag">Öne Çıkan</span>
+        <h2 class="section-title">En Son Proje</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="featured-card">
+        <div>
+          <div class="featured-badge"><i class="fas fa-star"></i> Öne Çıkan Proje</div>
+          <h3>Portfolio Web Sitesi</h3>
+          <p>
+            Kişisel portfolyo web sitem. HTML, CSS ve Vanilla JavaScript ile geliştirildi.
+            Tam responsive, animasyonlu ve modern tasarım anlayışıyla inşa edildi.
+            Projeler, beceriler ve iletişim bölümleri içeriyor.
+          </p>
+          <div class="project-tags" style="margin-bottom:20px">
+            <span class="ptag">HTML5</span>
+            <span class="ptag">CSS3</span>
+            <span class="ptag">JavaScript</span>
+            <span class="ptag">Responsive</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="plink"><i class="fab fa-github"></i> Kaynak Kodu</a>
+            <a href="../index.html" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Canlı Demo</a>
+          </div>
+        </div>
+        <div class="featured-visual"><i class="fas fa-globe"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÜM PROJELER -->
+  <section class="projects-page">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:40px">
+        <span class="section-tag">Tüm Çalışmalar</span>
+        <h2 class="section-title">Proje Galerisi</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="projects-filter">
+        <button class="filter-btn active" data-filter="all">Tümü</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="python">Python</button>
+        <button class="filter-btn" data-filter="java">Java</button>
+      </div>
+
+      <div class="projects-page-grid" id="projectsGrid">
+
+        <div class="project-card" data-category="web">
+          <div class="project-img pi-web"><div class="project-icon"><i class="fas fa-shopping-cart"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JS</span></div>
+            <h3>E-Ticaret Arayüzü</h3>
+            <p>Modern ve responsive bir e-ticaret ön yüz tasarımı. Ürün listeleme, sepet ve kullanıcı arayüzü içerir.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="python">
+          <div class="project-img pi-python"><div class="project-icon"><i class="fas fa-tasks"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Tkinter</span></div>
+            <h3>Görev Yöneticisi</h3>
+            <p>Python ve Tkinter ile geliştirilmiş masaüstü görev yönetim uygulaması. CRUD işlemleri ve dosya kaydetme özelliği.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="java">
+          <div class="project-img pi-java"><div class="project-icon"><i class="fas fa-university"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">Java</span><span class="ptag">OOP</span><span class="ptag">MySQL</span></div>
+            <h3>Öğrenci Bilgi Sistemi</h3>
+            <p>Java ile geliştirilmiş, MySQL veritabanı kullanan öğrenci kayıt ve not takip sistemi.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="python">
+          <div class="project-img pi-python"><div class="project-icon"><i class="fas fa-chart-line"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">Python</span><span class="ptag">Pandas</span><span class="ptag">Matplotlib</span></div>
+            <h3>Veri Analiz Aracı</h3>
+            <p>CSV dosyalarını okuyup görsel grafikler üreten Python tabanlı veri analiz ve görselleştirme aracı.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="web">
+          <div class="project-img pi-web"><div class="project-icon"><i class="fas fa-cloud-sun"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JS</span><span class="ptag">API</span></div>
+            <h3>Hava Durumu Uygulaması</h3>
+            <p>OpenWeather API kullanarak anlık hava durumu bilgisi sunan, animasyonlu ve responsive web uygulaması.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="java">
+          <div class="project-img pi-java"><div class="project-icon"><i class="fas fa-gamepad"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">Java</span><span class="ptag">Swing</span></div>
+            <h3>Yılan Oyunu</h3>
+            <p>Java Swing ile geliştirilmiş klasik yılan oyunu. Skor takibi, hız artışı ve oyun sonu ekranı içerir.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="python">
+          <div class="project-img pi-python"><div class="project-icon"><i class="fas fa-robot"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">Python</span><span class="ptag">BeautifulSoup</span></div>
+            <h3>Web Scraper</h3>
+            <p>Python ile geliştirilmiş web kazıma aracı. Belirtilen sitelerdeki verileri otomatik olarak toplar ve CSV'ye aktarır.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="web">
+          <div class="project-img pi-web"><div class="project-icon"><i class="fas fa-utensils"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">PHP</span><span class="ptag">MySQL</span></div>
+            <h3>Restoran Yönetim Sistemi</h3>
+            <p>PHP ve MySQL ile geliştirilmiş restoran sipariş ve menü yönetim sistemi. Admin paneli dahil.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="java">
+          <div class="project-img pi-java"><div class="project-icon"><i class="fas fa-calculator"></i></div></div>
+          <div class="project-body">
+            <div class="project-tags"><span class="ptag">Java</span><span class="ptag">Swing</span></div>
+            <h3>Hesap Makinesi</h3>
+            <p>Java Swing ile geliştirilen bilimsel hesap makinesi. Temel ve gelişmiş matematiksel işlemleri destekler.</p>
+            <div class="project-links">
+              <a href="#" class="plink"><i class="fab fa-github"></i> Kod</a>
+              <a href="#" class="plink plink-live"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub CTA -->
+  <section style="background:var(--dark-bg);padding:70px 0;text-align:center;">
+    <div class="container">
+      <h3 style="font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:14px;">Daha Fazlası GitHub'da</h3>
+      <p style="color:var(--text-muted);margin-bottom:28px;">Tüm projelerimi ve katkılarımı görmek için GitHub profilimi ziyaret edin.</p>
+      <a href="#" class="btn btn-primary"><i class="fab fa-github"></i> GitHub Profilim</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 <strong>Sefa Benli</strong>. Tüm hakları saklıdır.</p>
+      <p class="footer-sub">Sevgiyle kodlandı <i class="fas fa-heart"></i></p>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Bu sayfadaki filtreleme
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach((card, i) => {
+          const show = f === 'all' || card.dataset.category === f;
+          card.classList.toggle('hidden', !show);
+          if (show) {
+            card.style.opacity = '0'; card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+              card.style.opacity = ''; card.style.transform = '';
+            }, i * 60);
+          }
+        });
+      });
+    });
+    // Tilt
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const rx = ((e.clientY-r.top)/r.height-0.5)*-8;
+        const ry = ((e.clientX-r.left)/r.width-0.5)*8;
+        card.style.transform = `translateY(-8px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        card.style.transition = 'transform 0.1s';
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform=''; card.style.transition='transform 0.5s'; });
+    });
+  </script>
+</body>
+</html>

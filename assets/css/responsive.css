@@ -1,0 +1,53 @@
+/* ============================================================
+   SEFA BENLİ PORTFOLIO — responsive.css
+   Tüm sayfalar için ortak responsive kurallar
+   ============================================================ */
+
+/* ---- TABLET (max 1024px) ---- */
+@media (max-width: 1024px) {
+  .page-hero h1 { font-size: clamp(2rem, 5vw, 3rem); }
+  .two-col      { grid-template-columns: 1fr; }
+  .three-col    { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---- MOBİL (max 768px) ---- */
+@media (max-width: 768px) {
+  .page-hero        { padding: 130px 24px 60px; }
+  .page-hero h1     { font-size: 2rem; }
+  .page-section     { padding: 60px 0; }
+  .three-col        { grid-template-columns: 1fr; }
+  .two-col          { grid-template-columns: 1fr; }
+
+  /* Navbar mobile (zaten style.css'te var, burada güçlendirilir) */
+  .nav-links { gap: 28px; }
+  .nav-links a { font-size: 1.05rem; }
+
+  /* Blog */
+  .blog-grid        { grid-template-columns: 1fr; }
+
+  /* About page */
+  .about-page-grid  { grid-template-columns: 1fr; }
+
+  /* Projects page */
+  .projects-page-grid { grid-template-columns: 1fr; }
+
+  /* Contact page */
+  .contact-page-grid { grid-template-columns: 1fr; }
+
+  /* Auth pages */
+  .auth-card { padding: 28px 20px; }
+
+  /* Admin */
+  .admin-sidebar    { display: none; }
+  .admin-layout     { grid-template-columns: 1fr; }
+  .admin-stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---- KÜÇÜK MOBİL (max 480px) ---- */
+@media (max-width: 480px) {
+  .page-hero h1       { font-size: 1.7rem; }
+  .auth-card          { margin: 0 12px; }
+  .admin-stats-grid   { grid-template-columns: 1fr; }
+  .blog-card-meta     { flex-direction: column; gap: 4px; }
+  .service-icon       { width: 60px; height: 60px; font-size: 1.4rem; }
+}
