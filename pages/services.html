@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hizmetler | Sefa Benli</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .page-hero { min-height:42vh;background:var(--dark-bg);display:flex;align-items:center;padding:130px 24px 70px;position:relative;overflow:hidden; }
+    .page-hero-bg { position:absolute;inset:0;pointer-events:none; }
+    .ph-shape { position:absolute;border-radius:50%;filter:blur(80px);opacity:0.15; }
+    .ph-shape-1 { width:400px;height:400px;background:#10b981;top:-150px;right:-80px; }
+    .ph-shape-2 { width:250px;height:250px;background:var(--accent);bottom:-80px;left:10%; }
+    .page-hero-content { max-width:1200px;margin:0 auto;width:100%;z-index:1; }
+    .page-breadcrumb { font-size:0.78rem;color:var(--text-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px; }
+    .page-breadcrumb a { color:var(--accent-2);transition:color 0.3s; }
+    .page-breadcrumb a:hover { color:#fff; }
+    .page-breadcrumb i { font-size:0.6rem; }
+    .page-hero h1 { font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:#fff;margin-bottom:14px;animation:heroReveal 0.7s ease both 0.1s; }
+    .page-hero h1 .highlight { background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .page-hero p { font-size:1rem;color:var(--text-muted);max-width:520px;animation:heroReveal 0.7s ease both 0.25s; }
+    @keyframes heroReveal { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Services */
+    .services-section { background:var(--light-bg); padding:90px 0; }
+    .services-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:28px; margin-top:60px;
+    }
+    @media(max-width:960px){ .services-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:580px){ .services-grid{grid-template-columns:1fr;} }
+
+    .service-card {
+      background:var(--light-surface); border:1px solid var(--border-light);
+      border-radius:var(--radius); padding:36px 28px;
+      display:flex; flex-direction:column; gap:16px;
+      transition:var(--transition); position:relative; overflow:hidden;
+    }
+    .service-card::before {
+      content:''; position:absolute; top:0; left:0; right:0;
+      height:3px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      transform:scaleX(0); transform-origin:left;
+      transition:transform 0.4s ease;
+    }
+    .service-card:hover::before { transform:scaleX(1); }
+    .service-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(110,64,201,0.12); border-color:rgba(110,64,201,0.25); }
+
+    .service-icon {
+      width:68px; height:68px; border-radius:18px;
+      background:rgba(110,64,201,0.1); border:1px solid rgba(110,64,201,0.2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.6rem; color:var(--accent);
+      transition:all 0.3s;
+    }
+    .service-card:hover .service-icon {
+      background:var(--accent); color:#fff;
+      box-shadow:0 8px 24px rgba(110,64,201,0.35);
+    }
+    .service-card h3 { font-size:1.1rem; font-weight:700; color:var(--text-light); }
+    .service-card p  { font-size:0.85rem; color:var(--text-light-m); line-height:1.7; flex:1; }
+    .service-features { display:flex; flex-direction:column; gap:8px; margin-top:4px; }
+    .sf-item {
+      display:flex; align-items:center; gap:8px;
+      font-size:0.8rem; color:var(--text-light-m);
+    }
+    .sf-item i { color:var(--accent); font-size:0.65rem; flex-shrink:0; }
+    .service-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.82rem; font-weight:600; color:var(--accent);
+      margin-top:4px; transition:gap 0.3s;
+    }
+    .service-card:hover .service-btn { gap:12px; }
+
+    /* Process section */
+    .process-section { background:var(--dark-surface); padding:90px 0; }
+    .process-grid {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:24px; margin-top:60px;
+    }
+    @media(max-width:900px){ .process-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:500px){ .process-grid{grid-template-columns:1fr;} }
+
+    .process-step {
+      text-align:center; padding:32px 20px;
+      background:var(--dark-card); border:1px solid var(--border-dark);
+      border-radius:var(--radius); position:relative;
+      transition:var(--transition);
+    }
+    .process-step:hover { border-color:rgba(110,64,201,0.4); transform:translateY(-4px); }
+    .step-num {
+      width:52px; height:52px; border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff; font-size:1.1rem; font-weight:800;
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 18px;
+      box-shadow:0 4px 20px rgba(110,64,201,0.35);
+    }
+    .process-step h4 { font-size:0.95rem; font-weight:700; color:var(--text-dark); margin-bottom:10px; }
+    .process-step p  { font-size:0.8rem; color:var(--text-muted); line-height:1.6; }
+
+    /* CTA */
+    .cta-section { background:var(--dark-bg); padding:90px 0; text-align:center; }
+    .cta-box {
+      background:linear-gradient(135deg,var(--accent),#9b59b6,#3b82f6);
+      border-radius:24px; padding:60px 40px; max-width:800px; margin:0 auto;
+      position:relative; overflow:hidden;
+    }
+    .cta-box::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(circle at 20% 20%,rgba(255,255,255,0.12),transparent 60%);
+    }
+    .cta-box h2 { font-size:2rem;font-weight:800;color:#fff;margin-bottom:14px;position:relative; }
+    .cta-box p  { color:rgba(255,255,255,0.8);margin-bottom:32px;font-size:1rem;position:relative; }
+    .cta-btns  { display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative; }
+    .btn-white {
+      background:#fff; color:var(--accent); font-weight:700;
+      padding:13px 30px; border-radius:50px;
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.9rem; transition:var(--transition); border:none;
+    }
+    .btn-white:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,0,0,0.25); }
+    .btn-ghost {
+      background:transparent; color:#fff; font-weight:600;
+      padding:13px 30px; border-radius:50px; border:2px solid rgba(255,255,255,0.5);
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.9rem; transition:var(--transition);
+    }
+    .btn-ghost:hover { border-color:#fff; background:rgba(255,255,255,0.1); transform:translateY(-3px); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">SB<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">Hakkımda</a></li>
+        <li><a href="skills.html">Beceriler</a></li>
+        <li><a href="projects.html">Projeler</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="services.html" class="active">Hizmetler</a></li>
+        <li><a href="contact.html">İletişim</a></li>
+      </ul>
+      <div class="nav-auth">
+        <a href="login.html" class="nav-btn-login">Giriş Yap</a>
+        <a href="register.html" class="nav-btn-register">Kayıt Ol</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <div class="ph-shape ph-shape-1"></div>
+      <div class="ph-shape ph-shape-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="page-breadcrumb">
+        <a href="../index.html">Ana Sayfa</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Hizmetler</span>
+      </div>
+      <h1>Neler <span class="highlight">Sunabilirim?</span></h1>
+      <p>Web geliştirme, Python projeleri ve yazılım danışmanlığı alanlarında hizmet veriyorum.</p>
+    </div>
+  </section>
+
+  <!-- HİZMETLER -->
+  <section class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Yeteneklerim</span>
+        <h2 class="section-title">Sunduğum Hizmetler</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-globe"></i></div>
+          <h3>Web Geliştirme</h3>
+          <p>Modern, responsive ve hızlı web siteleri geliştiriyorum. HTML, CSS, JavaScript ve PHP ile tam stack çözümler sunabiliyorum.</p>
+          <div class="service-features">
+            <div class="sf-item"><i class="fas fa-circle"></i> Responsive tasarım</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> SEO uyumlu yapı</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Hızlı yükleme süresi</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Modern UI/UX</div>
+          </div>
+          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fab fa-python"></i></div>
+          <h3>Python Geliştirme</h3>
+          <p>Otomasyon scriptleri, veri analizi araçları ve masaüstü uygulamaları geliştiriyorum. Pandas, Matplotlib ve Tkinter deneyimim var.</p>
+          <div class="service-features">
+            <div class="sf-item"><i class="fas fa-circle"></i> Otomasyon scriptleri</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Veri analizi & görselleştirme</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Web scraping</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Masaüstü uygulamaları</div>
+          </div>
+          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-database"></i></div>
+          <h3>Veritabanı Tasarımı</h3>
+          <p>MySQL ile veritabanı tasarımı ve yönetimi yapıyorum. İlişkisel veritabanı modelleme, SQL sorguları ve optimizasyon.</p>
+          <div class="service-features">
+            <div class="sf-item"><i class="fas fa-circle"></i> MySQL veritabanı</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Şema tasarımı</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Sorgu optimizasyonu</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> PHP entegrasyonu</div>
+          </div>
+          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Responsive Tasarım</h3>
+          <p>Tüm cihazlarda mükemmel görünen, mobil öncelikli tasarımlar oluşturuyorum. CSS Grid, Flexbox ve media queries kullanıyorum.</p>
+          <div class="service-features">
+            <div class="sf-item"><i class="fas fa-circle"></i> Mobil öncelikli</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Cross-browser uyumluluk</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Performans optimizasyonu</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Erişilebilirlik standartları</div>
+          </div>
+          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-bug"></i></div>
+          <h3>Kod İnceleme & Debug</h3>
+          <p>Mevcut kodunuzdaki hataları bulup düzeltiyorum. Kod kalitesini artırmak için inceleme ve iyileştirme önerileri sunuyorum.</p>
+          <div class="service-features">
+            <div class="sf-item"><i class="fas fa-circle"></i> Bug tespiti ve düzeltme</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Kod kalitesi analizi</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Performans iyileştirme</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Dokümantasyon</div>
+          </div>
+          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Teknik Destek & Mentorluk</h3>
+          <p>Programlamayı öğrenmek isteyenlere temel konularda rehberlik ediyorum. Python, Java ve web teknolojilerinde pratik destek.</p>
+          <div class="service-features">
+            <div class="sf-item"><i class="fas fa-circle"></i> Temel programlama eğitimi</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Proje danışmanlığı</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Kod review</div>
+            <div class="sf-item"><i class="fas fa-circle"></i> Kariyer tavsiyesi</div>
+          </div>
+          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ÇALIŞMA SÜRECİ -->
+  <section class="process-section">
+    <div class="container">
+      <div class="section-header light">
+        <span class="section-tag">Nasıl Çalışırım?</span>
+        <h2 class="section-title">Çalışma Sürecim</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <h4>Keşif & Analiz</h4>
+          <p>Projenin ihtiyaçlarını anlamak için detaylı görüşme yapıyorum ve gereksinimler belirliyoruz.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <h4>Planlama</h4>
+          <p>Teknik yaklaşımı, kullanılacak teknolojileri ve zaman çizelgesini birlikte planlıyoruz.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <h4>Geliştirme</h4>
+          <p>Temiz, okunabilir ve iyi belgelenmiş kod yazarak projeyi adım adım hayata geçiriyorum.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <h4>Teslim & Destek</h4>
+          <p>Tamamlanan projeyi sunuyor, gerekli eğitimi verip ihtiyaç duyduğunuzda destek sağlıyorum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Birlikte Çalışalım mı?</h2>
+        <p>Projeniz için en iyi çözümü bulmak üzere hemen iletişime geçin.</p>
+        <div class="cta-btns">
+          <a href="contact.html" class="btn-white"><i class="fas fa-paper-plane"></i> İletişime Geç</a>
+          <a href="proje.html" class="btn-ghost"><i class="fas fa-eye"></i> Projelerimi Gör</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 <strong>Sefa Benli</strong>. Tüm hakları saklıdır.</p>
+      <p class="footer-sub">Sevgiyle kodlandı <i class="fas fa-heart"></i></p>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Sefa Benli</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .page-hero { min-height:42vh;background:var(--dark-bg);display:flex;align-items:center;padding:130px 24px 70px;position:relative;overflow:hidden; }
+    .page-hero-bg { position:absolute;inset:0;pointer-events:none; }
+    .ph-shape { position:absolute;border-radius:50%;filter:blur(80px);opacity:0.15; }
+    .ph-shape-1 { width:400px;height:400px;background:#3b82f6;top:-150px;right:-80px; }
+    .ph-shape-2 { width:250px;height:250px;background:var(--accent);bottom:-80px;left:10%; }
+    .page-hero-content { max-width:1200px;margin:0 auto;width:100%;z-index:1; }
+    .page-breadcrumb { font-size:0.78rem;color:var(--text-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px; }
+    .page-breadcrumb a { color:var(--accent-2);transition:color 0.3s; }
+    .page-breadcrumb a:hover { color:#fff; }
+    .page-breadcrumb i { font-size:0.6rem; }
+    .page-hero h1 { font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:#fff;margin-bottom:14px;animation:heroReveal 0.7s ease both 0.1s; }
+    .page-hero h1 .highlight { background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .page-hero p { font-size:1rem;color:var(--text-muted);max-width:520px;animation:heroReveal 0.7s ease both 0.25s; }
+    @keyframes heroReveal { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Blog layout */
+    .blog-section { background:var(--light-bg); padding:90px 0; }
+    .blog-layout {
+      display:grid; grid-template-columns:1fr 320px;
+      gap:48px; align-items:start;
+    }
+    @media(max-width:900px){ .blog-layout{grid-template-columns:1fr;} }
+
+    /* Blog cards */
+    .blog-grid { display:flex; flex-direction:column; gap:28px; }
+
+    .blog-card {
+      background:var(--light-surface); border:1px solid var(--border-light);
+      border-radius:var(--radius); overflow:hidden;
+      display:grid; grid-template-columns:260px 1fr;
+      transition:var(--transition);
+    }
+    @media(max-width:600px){ .blog-card{grid-template-columns:1fr;} }
+    .blog-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(110,64,201,0.12); border-color:rgba(110,64,201,0.25); }
+
+    .blog-img {
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex; align-items:center; justify-content:center;
+      font-size:2.5rem; color:rgba(255,255,255,0.9);
+      min-height:180px; position:relative; overflow:hidden;
+    }
+    .blog-img::before { content:'';position:absolute;inset:0;background:rgba(0,0,0,0.1); }
+    @media(max-width:600px){ .blog-img{min-height:140px;} }
+
+    .blog-body { padding:24px; display:flex; flex-direction:column; }
+    .blog-meta {
+      display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .blog-tag {
+      font-size:0.7rem; font-weight:600; padding:3px 10px; border-radius:50px;
+      background:rgba(110,64,201,0.1); color:var(--accent); border:1px solid rgba(110,64,201,0.2);
+    }
+    .blog-date { font-size:0.75rem; color:var(--text-light-m); display:flex; align-items:center; gap:5px; }
+    .blog-read { font-size:0.75rem; color:var(--text-light-m); display:flex; align-items:center; gap:5px; }
+    .blog-card h3 { font-size:1.1rem; font-weight:700; color:var(--text-light); margin-bottom:10px; line-height:1.4; }
+    .blog-card p  { font-size:0.85rem; color:var(--text-light-m); line-height:1.7; flex:1; margin-bottom:16px; }
+    .blog-read-btn {
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:0.82rem; font-weight:600; color:var(--accent);
+      transition:gap 0.3s;
+    }
+    .blog-card:hover .blog-read-btn { gap:10px; }
+
+    /* Sidebar */
+    .blog-sidebar { display:flex; flex-direction:column; gap:24px; }
+    .sidebar-card {
+      background:var(--light-surface); border:1px solid var(--border-light);
+      border-radius:var(--radius); padding:24px;
+    }
+    .sidebar-title {
+      font-size:0.85rem; font-weight:700; color:var(--text-light);
+      margin-bottom:16px; display:flex; align-items:center; gap:8px;
+    }
+    .sidebar-title i { color:var(--accent); }
+
+    /* Kategoriler */
+    .cat-list { display:flex; flex-direction:column; gap:10px; }
+    .cat-item {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 14px; border-radius:10px;
+      background:var(--light-card); border:1px solid var(--border-light);
+      font-size:0.83rem; font-weight:500; color:var(--text-light-m);
+      cursor:pointer; transition:var(--transition);
+    }
+    .cat-item:hover { border-color:var(--accent); color:var(--accent); }
+    .cat-count {
+      background:rgba(110,64,201,0.1); color:var(--accent);
+      padding:2px 8px; border-radius:50px; font-size:0.72rem; font-weight:600;
+    }
+
+    /* Popüler yazılar */
+    .pop-list { display:flex; flex-direction:column; gap:14px; }
+    .pop-item { display:flex; gap:14px; align-items:center; }
+    .pop-num {
+      width:32px; height:32px; border-radius:8px;
+      background:rgba(110,64,201,0.1); color:var(--accent);
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.8rem; font-weight:700; flex-shrink:0;
+    }
+    .pop-title { font-size:0.82rem; font-weight:600; color:var(--text-light); line-height:1.4; }
+    .pop-date  { font-size:0.72rem; color:var(--text-light-m); margin-top:2px; }
+
+    /* Etiketler */
+    .tag-cloud { display:flex; flex-wrap:wrap; gap:8px; }
+    .tag-item {
+      padding:6px 14px; border-radius:50px;
+      background:var(--light-card); border:1px solid var(--border-light);
+      font-size:0.75rem; font-weight:500; color:var(--text-light-m);
+      cursor:pointer; transition:var(--transition);
+    }
+    .tag-item:hover { border-color:var(--accent); color:var(--accent); background:rgba(110,64,201,0.06); }
+
+    /* Pagination */
+    .pagination {
+      display:flex; justify-content:center; gap:8px;
+      margin-top:40px;
+    }
+    .page-btn {
+      width:40px; height:40px; border-radius:10px;
+      border:1.5px solid var(--border-light);
+      background:var(--light-surface);
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.85rem; font-weight:600; color:var(--text-light-m);
+      cursor:pointer; transition:var(--transition);
+    }
+    .page-btn:hover, .page-btn.active {
+      border-color:var(--accent); color:var(--accent); background:rgba(110,64,201,0.07);
+    }
+    .page-btn.active { background:var(--accent); color:#fff; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">SB<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">Hakkımda</a></li>
+        <li><a href="skills.html">Beceriler</a></li>
+        <li><a href="projects.html">Projeler</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="services.html">Hizmetler</a></li>
+        <li><a href="contact.html">İletişim</a></li>
+      </ul>
+      <div class="nav-auth">
+        <a href="login.html" class="nav-btn-login">Giriş Yap</a>
+        <a href="register.html" class="nav-btn-register">Kayıt Ol</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <div class="ph-shape ph-shape-1"></div>
+      <div class="ph-shape ph-shape-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="page-breadcrumb">
+        <a href="../index.html">Ana Sayfa</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Blog</span>
+      </div>
+      <h1>Yazılarım & <span class="highlight">Notlarım</span></h1>
+      <p>Yazılım, teknoloji ve öğrendiklerim hakkında düşüncelerimi paylaşıyorum.</p>
+    </div>
+  </section>
+
+  <section class="blog-section">
+    <div class="container">
+      <div class="blog-layout">
+
+        <!-- YAZILAR -->
+        <div>
+          <div class="blog-grid">
+
+            <article class="blog-card">
+              <div class="blog-img" style="background:linear-gradient(135deg,#6e40c9,#3b82f6)">
+                <i class="fab fa-python" style="position:relative;z-index:1"></i>
+              </div>
+              <div class="blog-body">
+                <div class="blog-meta">
+                  <span class="blog-tag">Python</span>
+                  <span class="blog-date"><i class="fas fa-calendar"></i> 15 Ocak 2025</span>
+                  <span class="blog-read"><i class="fas fa-clock"></i> 5 dk okuma</span>
+                </div>
+                <h3>Python ile Veri Analizi: Pandas ve Matplotlib Rehberi</h3>
+                <p>Bu yazıda Python ekosisteminin en güçlü iki kütüphanesini kullanarak nasıl etkili veri analizi yapabileceğinizi adım adım anlatıyorum...</p>
+                <a href="#" class="blog-read-btn">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-img" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">
+                <i class="fas fa-code" style="position:relative;z-index:1"></i>
+              </div>
+              <div class="blog-body">
+                <div class="blog-meta">
+                  <span class="blog-tag">Web</span>
+                  <span class="blog-date"><i class="fas fa-calendar"></i> 28 Aralık 2024</span>
+                  <span class="blog-read"><i class="fas fa-clock"></i> 7 dk okuma</span>
+                </div>
+                <h3>CSS Grid vs Flexbox: Ne Zaman Hangisini Kullanmalıyız?</h3>
+                <p>Modern web geliştirmede iki temel layout sistemi olan CSS Grid ve Flexbox arasındaki farkları ve hangi durumda hangisinin tercih edilmesi gerektiğini açıklıyorum...</p>
+                <a href="#" class="blog-read-btn">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-img" style="background:linear-gradient(135deg,#b07219,#e05c1a)">
+                <i class="fab fa-java" style="position:relative;z-index:1"></i>
+              </div>
+              <div class="blog-body">
+                <div class="blog-meta">
+                  <span class="blog-tag">Java</span>
+                  <span class="blog-date"><i class="fas fa-calendar"></i> 10 Aralık 2024</span>
+                  <span class="blog-read"><i class="fas fa-clock"></i> 6 dk okuma</span>
+                </div>
+                <h3>Java OOP: Nesne Yönelimli Programlamanın 4 Temel Prensibi</h3>
+                <p>Encapsulation, Inheritance, Polymorphism ve Abstraction — Java'da OOP'nin dört temel prensibini gerçek örneklerle açıklayan bir rehber...</p>
+                <a href="#" class="blog-read-btn">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-img" style="background:linear-gradient(135deg,#10b981,#059669)">
+                <i class="fas fa-terminal" style="position:relative;z-index:1"></i>
+              </div>
+              <div class="blog-body">
+                <div class="blog-meta">
+                  <span class="blog-tag">Git</span>
+                  <span class="blog-date"><i class="fas fa-calendar"></i> 20 Kasım 2024</span>
+                  <span class="blog-read"><i class="fas fa-clock"></i> 4 dk okuma</span>
+                </div>
+                <h3>Git & GitHub: Öğrenciler İçin Temel Rehber</h3>
+                <p>Yazılım geliştirmede vazgeçilmez araçlardan biri olan Git'i öğrenmek artık çok daha kolay. Bu yazıda sıfırdan başlayarak branch, commit ve merge işlemlerini öğreniyoruz...</p>
+                <a href="#" class="blog-read-btn">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-img" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
+                <i class="fas fa-database" style="position:relative;z-index:1"></i>
+              </div>
+              <div class="blog-body">
+                <div class="blog-meta">
+                  <span class="blog-tag">Veritabanı</span>
+                  <span class="blog-date"><i class="fas fa-calendar"></i> 5 Kasım 2024</span>
+                  <span class="blog-read"><i class="fas fa-clock"></i> 8 dk okuma</span>
+                </div>
+                <h3>MySQL ile Temel SQL Sorguları: SELECT, JOIN ve Daha Fazlası</h3>
+                <p>Veritabanı dünyasına giriş yapmak isteyenler için hazırladığım bu rehberde MySQL'in en sık kullanılan SQL komutlarını pratik örneklerle ele alıyorum...</p>
+                <a href="#" class="blog-read-btn">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Sayfalama -->
+          <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="blog-sidebar">
+
+          <div class="sidebar-card">
+            <div class="sidebar-title"><i class="fas fa-folder"></i> Kategoriler</div>
+            <div class="cat-list">
+              <div class="cat-item">Python <span class="cat-count">3</span></div>
+              <div class="cat-item">Web Geliştirme <span class="cat-count">2</span></div>
+              <div class="cat-item">Java <span class="cat-count">2</span></div>
+              <div class="cat-item">Veritabanı <span class="cat-count">1</span></div>
+              <div class="cat-item">Git & DevOps <span class="cat-count">1</span></div>
+              <div class="cat-item">Kariyer <span class="cat-count">1</span></div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <div class="sidebar-title"><i class="fas fa-fire"></i> Popüler Yazılar</div>
+            <div class="pop-list">
+              <div class="pop-item">
+                <div class="pop-num">1</div>
+                <div>
+                  <div class="pop-title">Python ile Veri Analizi</div>
+                  <div class="pop-date">15 Ocak 2025</div>
+                </div>
+              </div>
+              <div class="pop-item">
+                <div class="pop-num">2</div>
+                <div>
+                  <div class="pop-title">CSS Grid vs Flexbox</div>
+                  <div class="pop-date">28 Aralık 2024</div>
+                </div>
+              </div>
+              <div class="pop-item">
+                <div class="pop-num">3</div>
+                <div>
+                  <div class="pop-title">Git & GitHub Rehberi</div>
+                  <div class="pop-date">20 Kasım 2024</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <div class="sidebar-title"><i class="fas fa-tags"></i> Etiketler</div>
+            <div class="tag-cloud">
+              <span class="tag-item">Python</span>
+              <span class="tag-item">Java</span>
+              <span class="tag-item">JavaScript</span>
+              <span class="tag-item">HTML</span>
+              <span class="tag-item">CSS</span>
+              <span class="tag-item">MySQL</span>
+              <span class="tag-item">Git</span>
+              <span class="tag-item">OOP</span>
+              <span class="tag-item">API</span>
+              <span class="tag-item">Veri Analizi</span>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 <strong>Sefa Benli</strong>. Tüm hakları saklıdır.</p>
+      <p class="footer-sub">Sevgiyle kodlandı <i class="fas fa-heart"></i></p>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
