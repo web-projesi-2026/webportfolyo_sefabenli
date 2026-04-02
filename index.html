@@ -1,1 +1,94 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sefa Benli | Portfolio</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== NAVİGASYON ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">SB<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Ana Sayfa</a></li>
+        <li><a href="pages/about.html">Hakkımda</a></li>
+        <li><a href="pages/skills.html">Beceriler</a></li>
+        <li><a href="pages/projects.html">Projeler</a></li>
+        <li><a href="pages/blog.html">Blog</a></li>
+        <li><a href="pages/services.html">Hizmetler</a></li>
+        <li><a href="pages/contact.html">İletişim</a></li>
+      </ul>
+      <div class="nav-auth">
+        <a href="pages/login.html" class="nav-btn-login">Giriş Yap</a>
+        <a href="pages/register.html" class="nav-btn-register">Kayıt Ol</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-greeting">Merhaba, ben</p>
+      <h1 class="hero-name">Sefa <span class="highlight">Benli</span></h1>
+      <div class="hero-typed-wrapper">
+        <span class="typed-prefix">Ben bir </span>
+        <span class="typed-text" id="typedText"></span>
+        <span class="typed-cursor">|</span>
+      </div>
+      <p class="hero-desc">
+        Bilgisayar Programcılığı öğrencisi olarak modern teknolojilerle
+        yaratıcı ve işlevsel projeler geliştiriyorum.
+      </p>
+      <div class="hero-buttons">
+        <a href="pages/projects.html" class="btn btn-primary">Projelerimi Gör</a>
+        <a href="pages/contact.html" class="btn btn-outline">İletişime Geç</a>
+      </div>
+      <div class="hero-socials">
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <span class="avatar-initials">SB</span>
+        </div>
+      </div>
+      <div class="floating-badge badge-1"><i class="fab fa-python"></i> Python</div>
+      <div class="floating-badge badge-2"><i class="fab fa-java"></i> Java</div>
+      <div class="floating-badge badge-3"><i class="fab fa-html5"></i> HTML/CSS</div>
+      <div class="floating-badge badge-4"><i class="fab fa-js"></i> JavaScript</div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 <strong>Sefa Benli</strong>. Tüm hakları saklıdır.</p>
+      <p class="footer-sub">Sevgiyle kodlandı <i class="fas fa-heart"></i></p>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Yukarı çık">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
