@@ -3,115 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>İletişim | Sefa Benli</title>
+  <title>Beceriler | Sefa Benli</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="stylesheet" href="../assets/css/responsive.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    .page-hero { min-height:42vh;background:var(--dark-bg);display:flex;align-items:center;padding:130px 24px 70px;position:relative;overflow:hidden; }
-    .page-hero-bg { position:absolute;inset:0;pointer-events:none; }
-    .ph-shape { position:absolute;border-radius:50%;filter:blur(80px);opacity:0.15; }
-    .ph-shape-1 { width:400px;height:400px;background:var(--accent);top:-150px;right:-80px; }
-    .ph-shape-2 { width:250px;height:250px;background:#10b981;bottom:-80px;left:10%; }
-    .page-hero-content { max-width:1200px;margin:0 auto;width:100%;z-index:1; }
-    .page-breadcrumb { font-size:0.78rem;color:var(--text-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px; }
-    .page-breadcrumb a { color:var(--accent-2);transition:color 0.3s; }
+    .page-hero { min-height:42vh; background:var(--dark-bg); display:flex; align-items:center; padding:130px 24px 70px; position:relative; overflow:hidden; }
+    .page-hero-bg { position:absolute; inset:0; pointer-events:none; }
+    .ph-shape { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.15; }
+    .ph-shape-1 { width:400px; height:400px; background:var(--accent); top:-150px; right:-80px; }
+    .ph-shape-2 { width:250px; height:250px; background:#a78bfa; bottom:-80px; left:10%; }
+    .page-hero-content { max-width:1200px; margin:0 auto; width:100%; z-index:1; }
+    .page-breadcrumb { font-size:0.78rem; color:var(--text-muted); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+    .page-breadcrumb a { color:var(--accent-2); transition:color 0.3s; }
     .page-breadcrumb a:hover { color:#fff; }
     .page-breadcrumb i { font-size:0.6rem; }
-    .page-hero h1 { font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:#fff;margin-bottom:14px;animation:heroReveal 0.7s ease both 0.1s; }
-    .page-hero h1 .highlight { background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
-    .page-hero p { font-size:1rem;color:var(--text-muted);max-width:520px;animation:heroReveal 0.7s ease both 0.25s; }
-    @keyframes heroReveal { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-
-    /* Contact page */
-    .contact-page { background:var(--dark-bg); padding:90px 0; }
-    .contact-page-grid {
-      display:grid; grid-template-columns:1fr 1.4fr;
-      gap:60px; align-items:start;
-    }
-    @media(max-width:860px){ .contact-page-grid{grid-template-columns:1fr;} }
-
-    /* Info side */
-    .contact-page-info h2 { font-size:1.8rem;font-weight:800;color:var(--text-dark);margin-bottom:14px; }
-    .contact-page-info p  { color:var(--text-muted);font-size:0.95rem;line-height:1.8;margin-bottom:36px; }
-
-    .contact-cards { display:flex;flex-direction:column;gap:16px;margin-bottom:36px; }
-    .contact-card {
-      display:flex; align-items:center; gap:18px;
-      background:var(--dark-card); border:1px solid var(--border-dark);
-      border-radius:var(--radius); padding:20px 24px;
-      transition:var(--transition);
-    }
-    .contact-card:hover { border-color:rgba(110,64,201,0.4); transform:translateX(4px); }
-    .cc-icon {
-      width:52px; height:52px; border-radius:14px;
-      background:rgba(110,64,201,0.15); border:1px solid rgba(110,64,201,0.25);
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.2rem; color:var(--accent-2); flex-shrink:0;
-    }
-    .cc-label { font-size:0.72rem;color:var(--text-muted);display:block;margin-bottom:3px;font-weight:500; }
-    .cc-value { font-size:0.92rem;color:var(--text-dark);font-weight:600; }
-    .cc-value a { color:var(--accent-2);transition:color 0.3s; }
-    .cc-value a:hover { color:#fff; }
-
-    .contact-page-socials { display:flex;gap:12px; }
-    .social-btn { width:44px;height:44px;border-radius:12px;background:var(--dark-card);border:1px solid var(--border-dark);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1rem;transition:var(--transition); }
-    .social-btn:hover { background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-3px); }
-
-    /* Availability badge */
-    .availability {
-      display:inline-flex; align-items:center; gap:10px;
-      background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25);
-      border-radius:50px; padding:10px 18px;
-      margin-bottom:32px;
-    }
-    .avail-dot {
-      width:8px; height:8px; border-radius:50%;
-      background:#4ade80;
-      box-shadow:0 0 0 3px rgba(74,222,128,0.2);
-      animation:pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,0.2)} 50%{box-shadow:0 0 0 6px rgba(74,222,128,0.1)} }
-    .avail-text { font-size:0.82rem;font-weight:600;color:#4ade80; }
-
-    /* Form */
-    .contact-page-form {
-      background:var(--dark-card); border:1px solid var(--border-dark);
-      border-radius:var(--radius); padding:40px;
-    }
-    .form-title { font-size:1.2rem;font-weight:700;color:var(--text-dark);margin-bottom:28px; }
-    .form-row { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
-    @media(max-width:480px){ .form-row{grid-template-columns:1fr;} }
-    .form-group { display:flex;flex-direction:column;gap:8px; }
-    .form-group label { font-size:0.82rem;font-weight:600;color:var(--text-muted); }
-    .form-group input, .form-group textarea, .form-group select {
-      background:rgba(255,255,255,0.04); border:1.5px solid var(--border-dark);
-      border-radius:10px; padding:13px 16px; color:var(--text-dark);
-      font-size:0.9rem; font-family:inherit; transition:var(--transition); resize:vertical;
-    }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-      outline:none; border-color:var(--accent); background:rgba(110,64,201,0.06);
-    }
-    .form-group input::placeholder, .form-group textarea::placeholder { color:var(--text-muted); }
-    .form-group select { appearance:none; cursor:pointer; }
-    .form-group select option { background:var(--dark-card); color:var(--text-dark); }
-    .form-success { display:none;align-items:center;gap:10px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:14px 18px;color:#4ade80;font-size:0.88rem;font-weight:500; }
-    .form-success.show { display:flex; }
+    .page-hero h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:800; color:#fff; margin-bottom:14px; animation: heroReveal 0.7s ease both 0.1s; }
+    .page-hero h1 .highlight { background:linear-gradient(135deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .page-hero p { font-size:1rem; color:var(--text-muted); max-width:520px; animation: heroReveal 0.7s ease both 0.25s; }
+    @keyframes heroReveal { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
   </style>
 </head>
 <body>
 
+  <!-- NAVİGASYON -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">SB<span class="dot">.</span></a>
       <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Ana Sayfa</a></li>
         <li><a href="about.html">Hakkımda</a></li>
-        <li><a href="skills.html">Beceriler</a></li>
+        <li><a href="skills.html" class="active">Beceriler</a></li>
         <li><a href="projects.html">Projeler</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="services.html">Hizmetler</a></li>
-        <li><a href="contact.html" class="active">İletişim</a></li>
+        <li><a href="contact.html">İletişim</a></li>
+        <li class="mobile-auth">
+          <a href="login.html" class="nav-btn-login">Giriş Yap</a>
+          <a href="register.html" class="nav-btn-register">Kayıt Ol</a>
+        </li>
       </ul>
       <div class="nav-auth">
         <a href="login.html" class="nav-btn-login">Giriş Yap</a>
@@ -121,6 +52,7 @@
     </div>
   </nav>
 
+  <!-- PAGE HERO -->
   <section class="page-hero">
     <div class="page-hero-bg">
       <div class="ph-shape ph-shape-1"></div>
@@ -130,114 +62,82 @@
       <div class="page-breadcrumb">
         <a href="../index.html">Ana Sayfa</a>
         <i class="fas fa-chevron-right"></i>
-        <span>İletişim</span>
+        <span>Beceriler</span>
       </div>
-      <h1>Benimle <span class="highlight">İletişime Geç</span></h1>
-      <p>Proje teklifi, staj fırsatı veya sadece merhaba demek için mesaj atabilirsiniz.</p>
+      <h1><span class="highlight">Becerilerim</span></h1>
+      <p>Öğrendiğim teknolojiler ve kullandığım araçlar.</p>
     </div>
   </section>
 
-  <section class="contact-page">
+  <!-- BECERİLER -->
+  <section class="skills" style="background:var(--dark-surface);">
     <div class="container">
-      <div class="contact-page-grid">
-
-        <!-- SOL -->
-        <div class="contact-page-info">
-          <div class="availability">
-            <div class="avail-dot"></div>
-            <span class="avail-text">Şu anda müsaitim — staj & iş fırsatlarına açığım</span>
-          </div>
-
-          <h2>Birlikte bir şeyler üretelim!</h2>
-          <p>Bir proje fikriniz mi var, staj teklifi mi sunmak istiyorsunuz ya da sadece merhaba demek mi istiyorsunuz? Mesaj atmaktan çekinmeyin!</p>
-
-          <div class="contact-cards">
-            <div class="contact-card">
-              <div class="cc-icon"><i class="fas fa-envelope"></i></div>
-              <div>
-                <span class="cc-label">E-posta</span>
-                <span class="cc-value"><a href="mailto:sefa@example.com">sefa@example.com</a></span>
-              </div>
+      <div class="section-header light">
+        <span class="section-tag">Yeteneklerim</span>
+        <h2 class="section-title">Beceriler</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-wrapper">
+        <div class="skills-category">
+          <h3 class="category-title"><i class="fas fa-code"></i> Programlama Dilleri</h3>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-info"><span>Python</span><span>80%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
             </div>
-            <div class="contact-card">
-              <div class="cc-icon"><i class="fas fa-phone"></i></div>
-              <div>
-                <span class="cc-label">Telefon</span>
-                <span class="cc-value">+90 5XX XXX XX XX</span>
-              </div>
+            <div class="skill-bar-item">
+              <div class="skill-info"><span>Java</span><span>70%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
             </div>
-            <div class="contact-card">
-              <div class="cc-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div>
-                <span class="cc-label">Konum</span>
-                <span class="cc-value">Türkiye</span>
-              </div>
+            <div class="skill-bar-item">
+              <div class="skill-info"><span>C / C++</span><span>60%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
             </div>
-            <div class="contact-card">
-              <div class="cc-icon"><i class="fas fa-clock"></i></div>
-              <div>
-                <span class="cc-label">Yanıt Süresi</span>
-                <span class="cc-value">Genellikle 24 saat içinde</span>
-              </div>
+            <div class="skill-bar-item">
+              <div class="skill-info"><span>JavaScript</span><span>75%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
             </div>
-          </div>
-
-          <div class="contact-page-socials">
-            <a href="#" class="social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
           </div>
         </div>
-
-        <!-- SAĞ: FORM -->
-        <div class="contact-page-form">
-          <div class="form-title"><i class="fas fa-paper-plane" style="color:var(--accent);margin-right:10px"></i>Mesaj Gönder</div>
-          <form id="contactForm">
-            <div style="display:flex;flex-direction:column;gap:18px;">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name">Ad Soyad *</label>
-                  <input type="text" id="name" placeholder="Adınız Soyadınız" required />
-                </div>
-                <div class="form-group">
-                  <label for="email">E-posta *</label>
-                  <input type="email" id="email" placeholder="ornek@email.com" required />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="type">Mesaj Türü</label>
-                <select id="type">
-                  <option value="">Seçiniz...</option>
-                  <option value="job">İş Teklifi</option>
-                  <option value="internship">Staj Teklifi</option>
-                  <option value="project">Proje İş Birliği</option>
-                  <option value="question">Soru / Danışmanlık</option>
-                  <option value="other">Diğer</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="subject">Konu *</label>
-                <input type="text" id="subject" placeholder="Mesajınızın konusu" required />
-              </div>
-              <div class="form-group">
-                <label for="message">Mesaj *</label>
-                <textarea id="message" rows="6" placeholder="Mesajınızı buraya yazın... Proje detayları, bütçe, zaman çizelgesi gibi bilgileri paylaşabilirsiniz." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary btn-full">
-                <i class="fas fa-paper-plane"></i> Mesaj Gönder
-              </button>
-              <div class="form-success" id="formSuccess">
-                <i class="fas fa-check-circle"></i> Mesajınız gönderildi! En kısa sürede dönüş yapacağım.
-              </div>
+        <div class="skills-category">
+          <h3 class="category-title"><i class="fas fa-palette"></i> Web Teknolojileri</h3>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-info"><span>HTML5</span><span>90%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
             </div>
-          </form>
+            <div class="skill-bar-item">
+              <div class="skill-info"><span>CSS3</span><span>85%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-info"><span>React</span><span>55%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="55"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-info"><span>MySQL / SQL</span><span>65%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+            </div>
+          </div>
         </div>
-
+        <div class="skills-category">
+          <h3 class="category-title"><i class="fas fa-tools"></i> Araçlar & Diğer</h3>
+          <div class="skills-tags">
+            <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+            <span class="skill-tag"><i class="fab fa-github"></i> GitHub</span>
+            <span class="skill-tag"><i class="fas fa-database"></i> MySQL</span>
+            <span class="skill-tag"><i class="fas fa-terminal"></i> Linux</span>
+            <span class="skill-tag"><i class="fas fa-code"></i> VS Code</span>
+            <span class="skill-tag"><i class="fas fa-network-wired"></i> Ağ Temelleri</span>
+            <span class="skill-tag"><i class="fas fa-layer-group"></i> OOP</span>
+            <span class="skill-tag"><i class="fas fa-project-diagram"></i> Algoritmalar</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <p>© 2025 <strong>Sefa Benli</strong>. Tüm hakları saklıdır.</p>
@@ -245,22 +145,10 @@
     </div>
   </footer>
 
-  <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+  <button class="scroll-top" id="scrollTop" aria-label="Yukarı çık">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
   <script src="../assets/js/main.js"></script>
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('button[type="submit"]');
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Mesaj Gönder';
-        btn.disabled = false;
-        document.getElementById('formSuccess').classList.add('show');
-        this.reset();
-        setTimeout(() => document.getElementById('formSuccess').classList.remove('show'), 5000);
-      }, 1500);
-    });
-  </script>
 </body>
 </html>
