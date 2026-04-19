@@ -1,0 +1,395 @@
+/* ================================================================
+   interactions.css  — v3  FULL REWRITE
+   FIX: Navbar layout düzeltmesi + 10 etkileşim CSS
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   NAVBAR LAYOUT FIX
+   Auth sayfalarında body flex olunca nav-container kırılıyordu.
+   ThemeToggle'ı nav-auth içine alıyoruz, flex wrap önlüyoruz.
+   ---------------------------------------------------------------- */
+.nav-container {
+  flex-wrap: nowrap !important;
+  gap: 0;
+}
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+/* Toggle butonu nav-auth içine taşındı — artık dışarı taşmıyor */
+.nav-auth #themeToggle {
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------------
+   ETK 1: DARK / LIGHT MODE
+   ---------------------------------------------------------------- */
+body {
+  transition: background-color 0.4s cubic-bezier(.4,0,.2,1),
+              color 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+/* — Light mode overrides — */
+body.light-mode { background: var(--light-bg); color: var(--text-light); }
+
+body.light-mode .navbar.scrolled {
+  background: rgba(245,247,255,0.95) !important;
+  box-shadow: 0 1px 0 var(--border-light) !important;
+}
+body.light-mode .navbar:not(.scrolled) {
+  background: rgba(245,247,255,0.8);
+  backdrop-filter: blur(14px);
+}
+body.light-mode .nav-logo              { color: var(--text-light); }
+body.light-mode .nav-links a           { color: var(--text-light-m); }
+body.light-mode .nav-links a:hover,
+body.light-mode .nav-links a.active    { color: var(--text-light); }
+body.light-mode .hamburger span        { background: var(--text-light); }
+body.light-mode .nav-btn-login         { color: var(--text-light-m); border-color: var(--border-light); }
+body.light-mode .nav-btn-login:hover   { color: var(--text-light); background: rgba(0,0,0,0.04); }
+body.light-mode .nav-btn-register      { background: var(--accent); color: #fff; }
+body.light-mode .nav-links.open        { background: var(--light-surface); border-left-color: var(--border-light); }
+body.light-mode .hero                  { background: var(--light-bg); }
+body.light-mode .hero-name             { color: var(--text-light); }
+body.light-mode .hero-greeting         { color: var(--accent); }
+body.light-mode .hero-desc             { color: var(--text-light-m); }
+body.light-mode .hero-typed-wrapper    { color: var(--text-light-m); }
+body.light-mode .avatar-inner          { background: var(--light-surface); }
+body.light-mode .floating-badge        { background: var(--light-surface); border-color: var(--border-light); color: var(--text-light); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+body.light-mode .btn-outline           { color: var(--text-light); border-color: rgba(0,0,0,0.18); }
+body.light-mode .btn-outline:hover     { border-color: var(--accent); color: var(--accent); }
+body.light-mode .hero-socials a        { border-color: var(--border-light); color: var(--text-light-m); }
+body.light-mode .hero-socials a:hover  { border-color: var(--accent); color: var(--accent); background: rgba(110,64,201,0.08); }
+body.light-mode .about                 { background: var(--light-bg); }
+body.light-mode .about-text h3,
+body.light-mode .about-text p          { color: var(--text-light); }
+body.light-mode .about-text p          { color: var(--text-light-m); }
+body.light-mode .stat-item             { background: var(--light-surface); border-color: var(--border-light); }
+body.light-mode .info-item             { background: var(--light-surface); border-color: var(--border-light); }
+body.light-mode .info-label            { color: var(--text-light-m); }
+body.light-mode .info-value            { color: var(--text-light); }
+body.light-mode .skills                { background: #eef0fb; }
+body.light-mode .skills-category       { background: var(--light-surface); border-color: var(--border-light); }
+body.light-mode .skills-category:hover { border-color: rgba(110,64,201,0.3); }
+body.light-mode .category-title        { color: var(--text-light); }
+body.light-mode .skill-info            { color: var(--text-light-m); }
+body.light-mode .skill-bar             { background: rgba(0,0,0,0.07); }
+body.light-mode .skill-tag             { background: rgba(110,64,201,0.08); border-color: rgba(110,64,201,0.2); color: var(--accent); }
+body.light-mode .projects              { background: var(--light-bg); }
+body.light-mode .project-card          { background: var(--light-surface); border-color: var(--border-light); }
+body.light-mode .project-body h3       { color: var(--text-light); }
+body.light-mode .project-body p        { color: var(--text-light-m); }
+body.light-mode .filter-btn            { background: var(--light-surface); border-color: var(--border-light); color: var(--text-light-m); }
+body.light-mode .filter-btn:hover,
+body.light-mode .filter-btn.active     { background: var(--accent); border-color: var(--accent); color: #fff; }
+body.light-mode .contact               { background: #eef0fb; }
+body.light-mode .contact-info h3       { color: var(--text-light); }
+body.light-mode .contact-info > p      { color: var(--text-light-m); }
+body.light-mode .contact-label         { color: var(--text-light-m); }
+body.light-mode .contact-value         { color: var(--text-light); }
+body.light-mode .contact-form          { background: var(--light-surface); border-color: var(--border-light); }
+body.light-mode .form-group label      { color: var(--text-light-m); }
+body.light-mode .form-group input,
+body.light-mode .form-group textarea   { background: rgba(0,0,0,0.03); border-color: var(--border-light); color: var(--text-light); }
+body.light-mode .form-group input:focus,
+body.light-mode .form-group textarea:focus { border-color: var(--accent); background: rgba(110,64,201,0.04); }
+body.light-mode .contact-icon          { background: rgba(110,64,201,0.1); border-color: rgba(110,64,201,0.2); }
+body.light-mode .social-btn            { background: var(--light-card); border-color: var(--border-light); color: var(--text-light-m); }
+body.light-mode .social-btn:hover      { background: var(--accent); border-color: var(--accent); color: #fff; }
+body.light-mode .footer                { background: var(--light-surface); border-color: var(--border-light); }
+body.light-mode .footer p              { color: var(--text-light-m); }
+body.light-mode .page-hero             { background: var(--light-bg) !important; }
+body.light-mode .page-hero h1          { color: var(--text-light) !important; }
+body.light-mode .blog-card,
+body.light-mode .service-card,
+body.light-mode .auth-card             { background: var(--light-surface); border-color: var(--border-light); }
+body.light-mode ::-webkit-scrollbar-track { background: var(--light-bg); }
+
+/* Auth sayfaları light */
+body.light-mode .auth-wrapper          { background: var(--light-surface); border-color: var(--border-light); }
+body.light-mode .auth-title            { color: var(--text-light); }
+body.light-mode .auth-sub,
+body.light-mode .auth-footer           { color: var(--text-light-m); }
+body.light-mode .input-wrap input      { background: rgba(0,0,0,0.03); border-color: var(--border-light); color: var(--text-light); }
+body.light-mode .input-wrap input:focus { border-color: var(--accent); background: rgba(110,64,201,0.04); }
+body.light-mode .form-group label      { color: var(--text-light-m); }
+body.light-mode .social-auth-btn       { border-color: var(--border-light); color: var(--text-light-m); background: rgba(0,0,0,0.02); }
+body.light-mode .social-auth-btn:hover { border-color: var(--accent); color: var(--text-light); }
+body.light-mode .remember-wrap span,
+body.light-mode .terms-wrap span       { color: var(--text-light-m); }
+body.light-mode .pw-label              { color: var(--text-light-m); }
+body.light-mode .pw-bar                { background: rgba(0,0,0,0.08); }
+body.light-mode .back-home             { color: var(--text-light-m); }
+body.light-mode .back-home:hover       { color: var(--accent); }
+body.light-mode .eye-toggle            { color: var(--text-light-m); }
+body.light-mode .auth-divider span     { color: var(--text-light-m); }
+body.light-mode .auth-divider::before,
+body.light-mode .auth-divider::after   { background: var(--border-light); }
+
+/* ----------------------------------------------------------------
+   TOGGLE BUTTON (nav-auth içinde, küçük ve kompakt)
+   ---------------------------------------------------------------- */
+#themeToggle {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer !important;
+  outline: none;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #1a1030, #2d1f4e);
+  box-shadow: 0 2px 8px rgba(110,64,201,0.4), inset 0 1px 2px rgba(0,0,0,0.3);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+  vertical-align: middle;
+}
+body.light-mode #themeToggle {
+  background: linear-gradient(135deg, #87ceeb, #e0f0ff);
+  box-shadow: 0 2px 8px rgba(100,180,255,0.5);
+}
+#themeToggle .toggle-track      { position: absolute; inset: 0; border-radius: 12px; overflow: hidden; }
+#themeToggle .toggle-stars      { position: absolute; inset: 0; transition: opacity 0.4s ease; }
+#themeToggle .toggle-stars::before {
+  content: ''; position: absolute; background: #fff; border-radius: 50%;
+  box-shadow: 5px 3px 0 rgba(255,255,255,0.9), 15px 6px 0 rgba(255,255,255,0.6), 25px 2px 0 rgba(255,255,255,0.8);
+  width: 2px; height: 2px; top: 4px; left: 4px;
+}
+body.light-mode #themeToggle .toggle-stars { opacity: 0; }
+#themeToggle .toggle-clouds     { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease; }
+#themeToggle .toggle-clouds::before {
+  content: ''; position: absolute; width: 13px; height: 6px;
+  background: rgba(255,255,255,0.75); border-radius: 10px; top: 7px; right: 5px;
+}
+body.light-mode #themeToggle .toggle-clouds { opacity: 1; }
+#themeToggle .toggle-orb {
+  position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e8d5ff, var(--accent));
+  box-shadow: 0 0 7px rgba(167,139,250,0.8);
+  transition: transform 0.5s cubic-bezier(.34,1.56,.64,1), background 0.4s ease, box-shadow 0.4s ease;
+}
+body.light-mode #themeToggle .toggle-orb {
+  transform: translateX(22px);
+  background: radial-gradient(circle at 35% 35%, #fffde4, #ffd700);
+  box-shadow: 0 0 7px rgba(255,215,0,0.9);
+}
+
+/* ----------------------------------------------------------------
+   ETK 2: NAVBAR 3D HOVER
+   ---------------------------------------------------------------- */
+.nav-3d-spotlight {
+  position: absolute; pointer-events: none;
+  height: 36px; width: 60px;
+  background: radial-gradient(ellipse, rgba(110,64,201,0.15) 0%, transparent 70%);
+  border-radius: 8px; top: 50%; transform: translateY(-50%);
+  opacity: 0; z-index: 0;
+  transition: left 0.22s cubic-bezier(.2,.8,.3,1), width 0.22s cubic-bezier(.2,.8,.3,1), opacity 0.2s ease;
+}
+.nav-links.spotlight-on .nav-3d-spotlight { opacity: 1; }
+.nav-links li  { position: relative; z-index: 1; }
+.nav-links a   { display: inline-block; will-change: transform; }
+
+/* ----------------------------------------------------------------
+   ETK 3: CUSTOM CURSOR  (sadece mouse cihazlarda)
+   ---------------------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  html                                    { cursor: none !important; }
+  a, button, .btn, .filter-btn, label,
+  [role="button"],
+  .project-card, .service-card, .blog-card,
+  .skills-category, .skill-tag, .social-btn,
+  .scroll-top, .auth-submit, .social-auth-btn,
+  .nav-logo, .hamburger, .eye-toggle,
+  #themeToggle                            { cursor: none !important; }
+  input, textarea, select                 { cursor: text !important; }
+}
+#cursorRing {
+  position: fixed; top: 0; left: 0;
+  width: 32px; height: 32px;
+  border: 2px solid rgba(110,64,201,0.85);
+  border-radius: 50%; pointer-events: none;
+  z-index: 99999; transform: translate(-50%,-50%);
+  transition: width .28s cubic-bezier(.2,.8,.3,1), height .28s cubic-bezier(.2,.8,.3,1),
+              border-color .28s ease, background .28s ease;
+  will-change: transform; mix-blend-mode: difference;
+}
+#cursorDot {
+  position: fixed; top: 0; left: 0;
+  width: 5px; height: 5px;
+  background: var(--accent-2); border-radius: 50%;
+  pointer-events: none; z-index: 100000;
+  transform: translate(-50%,-50%); will-change: transform;
+}
+#cursorRing.cursor-hover  { width: 48px; height: 48px; border-color: rgba(167,139,250,0.9); background: rgba(110,64,201,0.06); }
+#cursorRing.cursor-click  { width: 22px; height: 22px; background: rgba(110,64,201,0.18); }
+@media (hover: none), (pointer: coarse) {
+  #cursorRing, #cursorDot { display: none !important; }
+  html, a, button, .btn, .filter-btn, .project-card, .service-card, .blog-card,
+  .skills-category, .skill-tag, .social-btn, .scroll-top, #themeToggle,
+  input, textarea, select { cursor: auto !important; }
+}
+@media (max-width: 768px) {
+  #cursorRing, #cursorDot { display: none !important; }
+  html, a, button, .btn, .filter-btn, .project-card, .service-card, .blog-card,
+  .skills-category, .skill-tag, .social-btn, .scroll-top, #themeToggle,
+  input, textarea, select { cursor: auto !important; }
+}
+
+/* ----------------------------------------------------------------
+   ETK 4: SCROLL PROGRESS BAR
+   ---------------------------------------------------------------- */
+#scrollProgress {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  z-index: 10001; border-radius: 0 2px 2px 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, #6e40c9 0%, #a78bfa 40%, #3b82f6 70%, #6e40c9 100%);
+  background-size: 200% 100%;
+  animation: sbShimmer 2.5s linear infinite;
+  box-shadow: 0 0 8px rgba(110,64,201,0.5);
+}
+@keyframes sbShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+#scrollProgress::after {
+  content: ''; position: absolute; right: -1px; top: 50%;
+  transform: translateY(-50%); width: 7px; height: 7px;
+  background: var(--accent-2); border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-2);
+  display: none;
+}
+#scrollProgress.has-progress::after { display: block; }
+
+/* ----------------------------------------------------------------
+   ETK 5: PARTICLE BURST
+   ---------------------------------------------------------------- */
+.click-particle {
+  position: fixed; pointer-events: none; z-index: 99998;
+  border-radius: 50%; transform: translate(-50%,-50%);
+  animation: cpOut var(--dur,.65s) cubic-bezier(.2,.8,.3,1) forwards;
+}
+@keyframes cpOut {
+  0%   { opacity:1; transform:translate(-50%,-50%) translate(0,0) scale(1); }
+  100% { opacity:0; transform:translate(-50%,-50%) translate(var(--vx),var(--vy)) scale(0); }
+}
+.click-ripple {
+  position: fixed; pointer-events: none; z-index: 99997;
+  border-radius: 50%; border: 2px solid rgba(110,64,201,0.6);
+  transform: translate(-50%,-50%) scale(0);
+  animation: crOut .5s cubic-bezier(.2,.8,.3,1) forwards;
+}
+@keyframes crOut {
+  0%   { transform:translate(-50%,-50%) scale(0);   opacity:.8; }
+  100% { transform:translate(-50%,-50%) scale(2.6); opacity:0; }
+}
+
+/* ----------------------------------------------------------------
+   ETK 6: TYPING TOOLTIP — input focus'ta üstte beliren ipucu
+   ---------------------------------------------------------------- */
+.input-tooltip {
+  position: absolute; bottom: calc(100% + 8px); left: 0;
+  background: var(--dark-card); border: 1px solid rgba(110,64,201,0.35);
+  color: var(--accent-2); font-size: 0.72rem; font-weight: 500;
+  padding: 5px 10px; border-radius: 7px; white-space: nowrap;
+  pointer-events: none; z-index: 100;
+  opacity: 0; transform: translateY(4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.input-tooltip::after {
+  content: ''; position: absolute; top: 100%; left: 14px;
+  border: 5px solid transparent;
+  border-top-color: rgba(110,64,201,0.35);
+}
+.input-wrap.tip-active .input-tooltip {
+  opacity: 1; transform: translateY(0);
+}
+body.light-mode .input-tooltip {
+  background: var(--light-surface);
+  border-color: rgba(110,64,201,0.25);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+/* ----------------------------------------------------------------
+   ETK 7: FORM FIELD VALIDATION GLOW
+   ---------------------------------------------------------------- */
+.input-wrap.field-valid   input { border-color: #10b981 !important; }
+.input-wrap.field-invalid input { border-color: #ef4444 !important; }
+
+.input-wrap.field-valid input:focus   { box-shadow: 0 0 0 3px rgba(16,185,129,0.12); }
+.input-wrap.field-invalid input:focus { box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
+
+.input-wrap .field-check {
+  position: absolute; right: 36px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.78rem; opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.input-wrap.field-valid   .field-check { opacity: 1; color: #10b981; }
+.input-wrap.field-invalid .field-check { opacity: 1; color: #ef4444; }
+
+/* Eye toggle'ı field-check ile çakıştırma */
+.input-wrap .eye-toggle { right: 12px; }
+
+/* ----------------------------------------------------------------
+   ETK 8: CARD TILT (project, service, blog kartları)
+   ---------------------------------------------------------------- */
+.project-card,
+.service-card,
+.blog-card,
+.skills-category {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+/* Hover sırasında JS transform uygular, burada transition var */
+.project-card,
+.service-card,
+.blog-card {
+  transition: transform 0.12s ease, box-shadow var(--transition), border-color var(--transition) !important;
+}
+.project-card.tilt-reset,
+.service-card.tilt-reset,
+.blog-card.tilt-reset {
+  transition: transform 0.5s cubic-bezier(.2,.8,.3,1), box-shadow var(--transition), border-color var(--transition) !important;
+}
+
+/* ----------------------------------------------------------------
+   ETK 9: STAGGERED SECTION REVEAL (IntersectionObserver ile)
+   ---------------------------------------------------------------- */
+.reveal-el {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+}
+.reveal-el.revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ----------------------------------------------------------------
+   ETK 10: NAVBAR ACTIVE INDICATOR (scroll spy)
+   — Sayfayı kaydırırken ilgili bölüme göre nav link aktifleşir
+   ---------------------------------------------------------------- */
+.nav-links a.spy-active {
+  color: #fff !important;
+}
+.nav-links a.spy-active::after {
+  width: 100% !important;
+  box-shadow: 0 1px 6px rgba(110,64,201,0.6);
+}
+
+/* Smooth nav indicator pill */
+.nav-active-pill {
+  position: absolute;
+  bottom: -6px; left: 0;
+  height: 2px; width: 0;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: left 0.35s cubic-bezier(.4,0,.2,1), width 0.35s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(110,64,201,0.7);
+}

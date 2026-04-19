@@ -14,24 +14,57 @@ if (navbar) {
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('navLinks');
 
+// Overlay oluştur (mobil menü arka planı)
+let navOverlay = document.querySelector('.nav-overlay');
+if (!navOverlay) {
+  navOverlay = document.createElement('div');
+  navOverlay.className = 'nav-overlay';
+  document.body.appendChild(navOverlay);
+}
+
+function openMenu() {
+  navLinks.classList.add('open');
+  navOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  const spans = hamburger.querySelectorAll('span');
+  spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+  spans[1].style.opacity   = '0';
+  spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+  hamburger.setAttribute('aria-expanded', 'true');
+}
+
+function closeMenu() {
+  navLinks.classList.remove('open');
+  navOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+  const spans = hamburger.querySelectorAll('span');
+  spans[0].style.transform = '';
+  spans[1].style.opacity   = '';
+  spans[2].style.transform = '';
+  hamburger.setAttribute('aria-expanded', 'false');
+}
+
 if (hamburger && navLinks) {
   hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    const spans = hamburger.querySelectorAll('span');
-    const isOpen = navLinks.classList.contains('open');
-    spans[0].style.transform = isOpen ? 'rotate(45deg) translate(5px, 5px)' : '';
-    spans[1].style.opacity   = isOpen ? '0' : '';
-    spans[2].style.transform = isOpen ? 'rotate(-45deg) translate(5px, -5px)' : '';
+    navLinks.classList.contains('open') ? closeMenu() : openMenu();
   });
 
+  // Overlay tıklanınca kapat
+  navOverlay.addEventListener('click', closeMenu);
+
+  // Menü linkine tıklanınca kapat
   navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      const spans = hamburger.querySelectorAll('span');
-      spans[0].style.transform = '';
-      spans[1].style.opacity   = '';
-      spans[2].style.transform = '';
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  // ESC tuşu ile kapat
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // Ekran genişlediğinde (resize) menüyü sıfırla
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) closeMenu();
   });
 }
 
@@ -113,22 +146,13 @@ if (aboutSection) {
 }
 
 /* ---------- FADE-IN ANİMASYONU ---------- */
+/* Reveal animasyonu interactions.js → Reveal modülü tarafından yönetiliyor (.reveal-el / .revealed) */
+/* @keyframes fadeInUp filtre animasyonu için burada tanımlanıyor */
 const fadeStyle = document.createElement('style');
 fadeStyle.textContent = `
-  .fade-in-el { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease,transform 0.6s ease; }
-  .fade-in-visible { opacity:1 !important; transform:translateY(0) !important; }
   @keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
 `;
 document.head.appendChild(fadeStyle);
-
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('fade-in-visible'); });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.project-card, .skills-category, .contact-item, .about-card-visual, .about-text').forEach(el => {
-  el.classList.add('fade-in-el');
-  fadeObserver.observe(el);
-});
 
 /* ---------- PROJE FİLTRELEME ---------- */
 const filterBtns   = document.querySelectorAll('.filter-btn');
@@ -194,19 +218,7 @@ const headerObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.section-header').forEach(h => headerObserver.observe(h));
 
 /* ---------- PROJE KARTI: 3D TILT ---------- */
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const rotX = ((e.clientY - rect.top) / rect.height - 0.5) * -6;
-    const rotY = ((e.clientX - rect.left) / rect.width - 0.5) * 6;
-    card.style.transform = `translateY(-8px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-    card.style.transition = 'transform 0.1s ease';
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-    card.style.transition = 'transform 0.5s ease';
-  });
-});
+/* interactions.js → CardTilt modülü tarafından yönetiliyor (.project-card, .service-card, .blog-card) */
 
 /* ---------- SKILL TAG STAGGER ---------- */
 const tagObserver = new IntersectionObserver((entries) => {
