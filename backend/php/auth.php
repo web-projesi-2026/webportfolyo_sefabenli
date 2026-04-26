@@ -12,6 +12,10 @@
  *   </form>
  */
 
+
+
+
+
 session_start();
 
 // Merkezi veritabanı bağlantısı
@@ -35,6 +39,7 @@ function redirect(string $path, string $msg = '', string $type = 'error'): never
 /**
  * Kullanıcı girdisini temizler.
  */
+//Sefa Benli
 function sanitize(string $val): string
 {
     return htmlspecialchars(trim($val), ENT_QUOTES, 'UTF-8');
