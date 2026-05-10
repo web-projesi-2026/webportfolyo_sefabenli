@@ -339,7 +339,6 @@ body.light-mode .input-tooltip {
    ETK 8: CARD TILT (project, service, blog kartları)
    ---------------------------------------------------------------- */
 .project-card,
-.service-card,
 .blog-card,
 .skills-category {
   transform-style: preserve-3d;
@@ -347,12 +346,10 @@ body.light-mode .input-tooltip {
 }
 /* Hover sırasında JS transform uygular, burada transition var */
 .project-card,
-.service-card,
 .blog-card {
   transition: transform 0.12s ease, box-shadow var(--transition), border-color var(--transition) !important;
 }
 .project-card.tilt-reset,
-.service-card.tilt-reset,
 .blog-card.tilt-reset {
   transition: transform 0.5s cubic-bezier(.2,.8,.3,1), box-shadow var(--transition), border-color var(--transition) !important;
 }

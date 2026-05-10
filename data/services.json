@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "icon": "fas fa-globe",
+    "title": "Web Geliştirme",
+    "description": "Modern, responsive ve hızlı web siteleri geliştiriyorum. HTML, CSS, JavaScript ve PHP ile tam stack çözümler sunabiliyorum.",
+    "features": ["Responsive tasarım", "SEO uyumlu yapı", "Hızlı yükleme süresi", "Modern UI/UX"],
+    "price": "500₺'den başlayan fiyatlarla",
+    "badge": "Popüler"
+  },
+  {
+    "id": 2,
+    "icon": "fab fa-python",
+    "title": "Python Geliştirme",
+    "description": "Otomasyon scriptleri, veri analizi araçları ve masaüstü uygulamaları geliştiriyorum. Pandas, Matplotlib ve Tkinter deneyimim var.",
+    "features": ["Otomasyon scriptleri", "Veri analizi & görselleştirme", "Web scraping", "Masaüstü uygulamaları"],
+    "price": "400₺'den başlayan fiyatlarla",
+    "badge": ""
+  },
+  {
+    "id": 3,
+    "icon": "fas fa-database",
+    "title": "Veritabanı Tasarımı",
+    "description": "MySQL ile veritabanı tasarımı ve yönetimi yapıyorum. İlişkisel veritabanı modelleme, SQL sorguları ve optimizasyon.",
+    "features": ["MySQL veritabanı", "Şema tasarımı", "Sorgu optimizasyonu", "PHP entegrasyonu"],
+    "price": "350₺'den başlayan fiyatlarla",
+    "badge": ""
+  },
+  {
+    "id": 4,
+    "icon": "fas fa-mobile-alt",
+    "title": "Responsive Tasarım",
+    "description": "Tüm cihazlarda mükemmel görünen, mobil öncelikli tasarımlar oluşturuyorum. CSS Grid, Flexbox ve media queries kullanıyorum.",
+    "features": ["Mobil öncelikli", "Cross-browser uyumluluk", "Performans optimizasyonu", "Erişilebilirlik standartları"],
+    "price": "300₺'den başlayan fiyatlarla",
+    "badge": ""
+  },
+  {
+    "id": 5,
+    "icon": "fas fa-bug",
+    "title": "Kod İnceleme & Debug",
+    "description": "Mevcut kodunuzdaki hataları bulup düzeltiyorum. Kod kalitesini artırmak için inceleme ve iyileştirme önerileri sunuyorum.",
+    "features": ["Bug tespiti ve düzeltme", "Kod kalitesi analizi", "Performans iyileştirme", "Dokümantasyon"],
+    "price": "250₺'den başlayan fiyatlarla",
+    "badge": "Hızlı"
+  },
+  {
+    "id": 6,
+    "icon": "fas fa-graduation-cap",
+    "title": "Teknik Destek & Mentorluk",
+    "description": "Programlamayı öğrenmek isteyenlere temel konularda rehberlik ediyorum. Python, Java ve web teknolojilerinde pratik destek.",
+    "features": ["Temel programlama eğitimi", "Proje danışmanlığı", "Kod review", "Kariyer tavsiyesi"],
+    "price": "200₺/saat",
+    "badge": "Yeni"
+  }
+]
