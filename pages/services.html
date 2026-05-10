@@ -6,130 +6,125 @@
   <title>Hizmetler | Sefa Benli</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="stylesheet" href="../assets/css/responsive.css" />
-  <link rel="stylesheet" href="../assets/css/interactions.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    .page-hero { min-height:42vh;background:var(--dark-bg);display:flex;align-items:center;padding:130px 24px 70px;position:relative;overflow:hidden; }
-    .page-hero-bg { position:absolute;inset:0;pointer-events:none; }
-    .ph-shape { position:absolute;border-radius:50%;filter:blur(80px);opacity:0.15; }
-    .ph-shape-1 { width:400px;height:400px;background:#10b981;top:-150px;right:-80px; }
-    .ph-shape-2 { width:250px;height:250px;background:var(--accent);bottom:-80px;left:10%; }
-    .page-hero-content { max-width:1200px;margin:0 auto;width:100%;z-index:1; }
-    .page-breadcrumb { font-size:0.78rem;color:var(--text-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px; }
-    .page-breadcrumb a { color:var(--accent-2);transition:color 0.3s; }
-    .page-breadcrumb a:hover { color:#fff; }
-    .page-breadcrumb i { font-size:0.6rem; }
-    .page-hero h1 { font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:#fff;margin-bottom:14px;animation:heroReveal 0.7s ease both 0.1s; }
-    .page-hero h1 .highlight { background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
-    .page-hero p { font-size:1rem;color:var(--text-muted);max-width:520px;animation:heroReveal 0.7s ease both 0.25s; }
-    @keyframes heroReveal { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-    /* Services */
-    .services-section { background:var(--light-bg); padding:90px 0; }
-    .services-grid {
-      display:grid; grid-template-columns:repeat(3,1fr);
-      gap:28px; margin-top:60px;
-    }
-    @media(max-width:960px){ .services-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:580px){ .services-grid{grid-template-columns:1fr;} }
+    /* HERO */
+    .page-hero{min-height:42vh;background:var(--dark-bg);display:flex;align-items:center;padding:130px 24px 70px;position:relative;overflow:hidden}
+    .ph-bg{position:absolute;inset:0;pointer-events:none}
+    .ph-shape{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15}
+    .ph-shape-1{width:400px;height:400px;background:#10b981;top:-150px;right:-80px}
+    .ph-shape-2{width:250px;height:250px;background:var(--accent);bottom:-80px;left:10%}
+    .ph-content{max-width:1200px;margin:0 auto;width:100%;z-index:1;position:relative}
+    .breadcrumb{font-size:.78rem;color:var(--text-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .breadcrumb a{color:var(--accent-2);transition:color .3s}
+    .breadcrumb a:hover{color:#fff}
+    .breadcrumb i{font-size:.6rem}
+    .page-hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:#fff;margin-bottom:14px}
+    .page-hero h1 .hl{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-hero p{font-size:1rem;color:var(--text-muted);max-width:520px}
 
-    .service-card {
-      background:var(--light-surface); border:1px solid var(--border-light);
-      border-radius:var(--radius); padding:36px 28px;
-      display:flex; flex-direction:column; gap:16px;
-      transition:var(--transition); position:relative; overflow:hidden;
-    }
-    .service-card::before {
-      content:''; position:absolute; top:0; left:0; right:0;
-      height:3px;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      transform:scaleX(0); transform-origin:left;
-      transition:transform 0.4s ease;
-    }
-    .service-card:hover::before { transform:scaleX(1); }
-    .service-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(110,64,201,0.12); border-color:rgba(110,64,201,0.25); }
+    /* FAV BANNER */
+    .fav-bar{background:var(--dark-surface);border-bottom:1px solid var(--border-dark);padding:14px 0}
+    .fav-bar .container{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .fav-info{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--text-muted)}
+    .fav-info i{color:#f59e0b}
+    .fav-badge{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-size:.75rem;font-weight:700;padding:2px 9px;border-radius:50px}
+    .fav-actions{display:flex;gap:10px}
+    .btn-favs{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:50px;font-size:.8rem;font-weight:600;background:rgba(110,64,201,.15);border:1px solid rgba(110,64,201,.3);color:var(--accent-2);cursor:pointer;transition:.3s}
+    .btn-favs:hover{background:rgba(110,64,201,.3)}
+    .btn-favs.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .btn-clr{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:50px;font-size:.78rem;background:transparent;border:1px solid rgba(239,68,68,.3);color:#ef4444;cursor:pointer;transition:.3s}
+    .btn-clr:hover{background:rgba(239,68,68,.1)}
 
-    .service-icon {
-      width:68px; height:68px; border-radius:18px;
-      background:rgba(110,64,201,0.1); border:1px solid rgba(110,64,201,0.2);
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.6rem; color:var(--accent);
-      transition:all 0.3s;
-    }
-    .service-card:hover .service-icon {
-      background:var(--accent); color:#fff;
-      box-shadow:0 8px 24px rgba(110,64,201,0.35);
-    }
-    .service-card h3 { font-size:1.1rem; font-weight:700; color:var(--text-light); }
-    .service-card p  { font-size:0.85rem; color:var(--text-light-m); line-height:1.7; flex:1; }
-    .service-features { display:flex; flex-direction:column; gap:8px; margin-top:4px; }
-    .sf-item {
-      display:flex; align-items:center; gap:8px;
-      font-size:0.8rem; color:var(--text-light-m);
-    }
-    .sf-item i { color:var(--accent); font-size:0.65rem; flex-shrink:0; }
-    .service-btn {
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:0.82rem; font-weight:600; color:var(--accent);
-      margin-top:4px; transition:gap 0.3s;
-    }
-    .service-card:hover .service-btn { gap:12px; }
+    /* FILTER */
+    .filter-bar{background:var(--dark-bg);padding:18px 0;border-bottom:1px solid var(--border-dark)}
+    .filter-bar .container{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .fl{font-size:.8rem;color:var(--text-muted);margin-right:4px}
+    .fbtn{padding:6px 16px;border-radius:50px;font-size:.8rem;font-weight:600;background:transparent;border:1px solid var(--border-dark);color:var(--text-muted);cursor:pointer;transition:.3s}
+    .fbtn:hover{border-color:var(--accent);color:var(--accent-2)}
+    .fbtn.on{background:var(--accent);border-color:var(--accent);color:#fff}
 
-    /* Process section */
-    .process-section { background:var(--dark-surface); padding:90px 0; }
-    .process-grid {
-      display:grid; grid-template-columns:repeat(4,1fr);
-      gap:24px; margin-top:60px;
-    }
-    @media(max-width:900px){ .process-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:500px){ .process-grid{grid-template-columns:1fr;} }
+    /* SERVICES SECTION */
+    .services-section{background:var(--light-bg);padding:90px 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:60px}
+    @media(max-width:960px){.grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:580px){.grid{grid-template-columns:1fr}}
 
-    .process-step {
-      text-align:center; padding:32px 20px;
-      background:var(--dark-card); border:1px solid var(--border-dark);
-      border-radius:var(--radius); position:relative;
-      transition:var(--transition);
-    }
-    .process-step:hover { border-color:rgba(110,64,201,0.4); transform:translateY(-4px); }
-    .step-num {
-      width:52px; height:52px; border-radius:50%;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#fff; font-size:1.1rem; font-weight:800;
-      display:flex; align-items:center; justify-content:center;
-      margin:0 auto 18px;
-      box-shadow:0 4px 20px rgba(110,64,201,0.35);
-    }
-    .process-step h4 { font-size:0.95rem; font-weight:700; color:var(--text-dark); margin-bottom:10px; }
-    .process-step p  { font-size:0.8rem; color:var(--text-muted); line-height:1.6; }
+    /* SKELETON */
+    .sk{background:#fff;border:1px solid var(--border-light);border-radius:var(--radius);padding:36px 28px;display:flex;flex-direction:column;gap:14px;animation:pulse 1.4s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+    .sk-i{width:68px;height:68px;border-radius:18px;background:#e2e8f0}
+    .sk-l{height:13px;border-radius:6px;background:#e2e8f0}
+    .sk-l.s{width:55%}.sk-l.m{width:80%}.sk-l.f{width:100%}
+
+    /* CARD */
+    .card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:16px;padding:32px 26px;display:flex;flex-direction:column;gap:14px;position:relative;transition:box-shadow .3s,border-color .3s,transform .3s}
+    .card:hover{box-shadow:0 20px 50px rgba(110,64,201,.13);border-color:rgba(110,64,201,.28);transform:translateY(-5px)}
+    .card.fav{border-color:rgba(245,158,11,.4);box-shadow:0 4px 20px rgba(245,158,11,.1)}
+    .card.hidden{display:none}
+
+    /* top accent line via pseudo */
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+    .card:hover::before{transform:scaleX(1)}
+
+    .cbadge{position:absolute;top:14px;right:14px;padding:3px 10px;border-radius:50px;font-size:.7rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
+    .cicon{width:66px;height:66px;border-radius:18px;background:rgba(110,64,201,.1);border:1px solid rgba(110,64,201,.18);display:flex;align-items:center;justify-content:center;font-size:1.55rem;color:var(--accent);transition:.3s;flex-shrink:0}
+    .card:hover .cicon{background:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(110,64,201,.35)}
+    .card h3{font-size:1.05rem;font-weight:700;color:var(--text-light)}
+    .card p{font-size:.84rem;color:var(--text-light-m);line-height:1.7;flex:1}
+    .feats{display:flex;flex-direction:column;gap:7px}
+    .feat{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-light-m)}
+    .feat i{color:var(--accent);font-size:.6rem;flex-shrink:0}
+    .cprice{font-size:.82rem;font-weight:600;color:var(--accent)}
+    .cprice i{margin-right:5px}
+    .cactions{display:flex;align-items:center;gap:10px;margin-top:4px}
+    .clink{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:var(--accent);flex:1;transition:gap .3s}
+    .card:hover .clink{gap:11px}
+    .cbtn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(0,0,0,.1);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#94a3b8;font-size:.95rem;flex-shrink:0;transition:.3s}
+    .cbtn:hover{border-color:#f59e0b;color:#f59e0b;transform:scale(1.12)}
+    .cbtn.on{background:rgba(245,158,11,.12);border-color:#f59e0b;color:#f59e0b}
+
+    /* EMPTY */
+    .empty{grid-column:1/-1;text-align:center;padding:60px 20px;display:none}
+    .empty i{font-size:2.8rem;color:#94a3b8;display:block;margin-bottom:14px}
+    .empty h3{color:var(--text-light);margin-bottom:8px}
+    .empty p{color:var(--text-light-m);font-size:.88rem}
+    .empty.show{display:block}
+
+    /* TOAST */
+    .toasts{position:fixed;bottom:26px;right:26px;z-index:9999;display:flex;flex-direction:column;gap:9px;pointer-events:none}
+    .toast{display:flex;align-items:center;gap:10px;padding:11px 17px;border-radius:12px;background:#1c2333;border:1px solid rgba(255,255,255,.08);color:#e6edf3;font-size:.84rem;font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,.35);min-width:230px;animation:tIn .3s ease}
+    .toast.out{animation:tOut .3s ease forwards}
+    @keyframes tIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+    @keyframes tOut{to{opacity:0;transform:translateX(28px)}}
+    .toast .ti{font-size:.95rem}
+    .toast.add .ti{color:#f59e0b}
+    .toast.rem .ti{color:#94a3b8}
+    .toast.clr .ti{color:#ef4444}
+
+    /* PROCESS */
+    .process-section{background:var(--dark-surface);padding:90px 0}
+    .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px}
+    @media(max-width:900px){.pgrid{grid-template-columns:1fr 1fr}}
+    @media(max-width:500px){.pgrid{grid-template-columns:1fr}}
+    .pstep{text-align:center;padding:32px 20px;background:var(--dark-card);border:1px solid var(--border-dark);border-radius:var(--radius);transition:.35s}
+    .pstep:hover{border-color:rgba(110,64,201,.4);transform:translateY(-4px)}
+    .pnum{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 4px 20px rgba(110,64,201,.35)}
+    .pstep h4{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:10px}
+    .pstep p{font-size:.8rem;color:var(--text-muted);line-height:1.6}
 
     /* CTA */
-    .cta-section { background:var(--dark-bg); padding:90px 0; text-align:center; }
-    .cta-box {
-      background:linear-gradient(135deg,var(--accent),#9b59b6,#3b82f6);
-      border-radius:24px; padding:60px 40px; max-width:800px; margin:0 auto;
-      position:relative; overflow:hidden;
-    }
-    .cta-box::before {
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(circle at 20% 20%,rgba(255,255,255,0.12),transparent 60%);
-    }
-    .cta-box h2 { font-size:2rem;font-weight:800;color:#fff;margin-bottom:14px;position:relative; }
-    .cta-box p  { color:rgba(255,255,255,0.8);margin-bottom:32px;font-size:1rem;position:relative; }
-    .cta-btns  { display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative; }
-    .btn-white {
-      background:#fff; color:var(--accent); font-weight:700;
-      padding:13px 30px; border-radius:50px;
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:0.9rem; transition:var(--transition); border:none;
-    }
-    .btn-white:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,0,0,0.25); }
-    .btn-ghost {
-      background:transparent; color:#fff; font-weight:600;
-      padding:13px 30px; border-radius:50px; border:2px solid rgba(255,255,255,0.5);
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:0.9rem; transition:var(--transition);
-    }
-    .btn-ghost:hover { border-color:#fff; background:rgba(255,255,255,0.1); transform:translateY(-3px); }
+    .cta-section{background:var(--dark-bg);padding:90px 0;text-align:center}
+    .cta-box{background:linear-gradient(135deg,var(--accent),#9b59b6,#3b82f6);border-radius:24px;padding:60px 40px;max-width:800px;margin:0 auto;position:relative;overflow:hidden}
+    .cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.12),transparent 60%)}
+    .cta-box h2{font-size:2rem;font-weight:800;color:#fff;margin-bottom:14px;position:relative}
+    .cta-box p{color:rgba(255,255,255,.8);margin-bottom:32px;position:relative}
+    .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
+    .btn-w{background:#fff;color:var(--accent);font-weight:700;padding:13px 30px;border-radius:50px;display:inline-flex;align-items:center;gap:8px;font-size:.9rem;transition:.3s;border:none}
+    .btn-w:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .btn-g{background:transparent;color:#fff;font-weight:600;padding:13px 30px;border-radius:50px;border:2px solid rgba(255,255,255,.5);display:inline-flex;align-items:center;gap:8px;font-size:.9rem;transition:.3s}
+    .btn-g:hover{border-color:#fff;background:rgba(255,255,255,.1);transform:translateY(-3px)}
   </style>
 </head>
 <body>
@@ -158,20 +153,49 @@
   </nav>
 
   <section class="page-hero">
-    <div class="page-hero-bg">
+    <div class="ph-bg">
       <div class="ph-shape ph-shape-1"></div>
       <div class="ph-shape ph-shape-2"></div>
     </div>
-    <div class="page-hero-content">
-      <div class="page-breadcrumb">
+    <div class="ph-content">
+      <div class="breadcrumb">
         <a href="../index.html">Ana Sayfa</a>
         <i class="fas fa-chevron-right"></i>
         <span>Hizmetler</span>
       </div>
-      <h1>Neler <span class="highlight">Sunabilirim?</span></h1>
+      <h1>Neler <span class="hl">Sunabilirim?</span></h1>
       <p>Web geliştirme, Python projeleri ve yazılım danışmanlığı alanlarında hizmet veriyorum.</p>
     </div>
   </section>
+
+  <!-- FAVORİLER BAR -->
+  <div class="fav-bar">
+    <div class="container">
+      <div class="fav-info">
+        <i class="fas fa-star"></i>
+        <span>Favorilerim:</span>
+        <span class="fav-badge" id="favCount">0</span>
+        <span id="favLabel">— kalp ikonuna tıklayarak ekleyin</span>
+      </div>
+      <div class="fav-actions">
+        <button class="btn-favs" id="btnFavs"><i class="fas fa-filter"></i> Favorileri Göster</button>
+        <button class="btn-clr" id="btnClr"><i class="fas fa-trash-alt"></i> Temizle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FİLTRE -->
+  <div class="filter-bar">
+    <div class="container">
+      <span class="fl"><i class="fas fa-sliders-h"></i> Filtrele:</span>
+      <button class="fbtn on" data-f="all">Tümü</button>
+      <button class="fbtn" data-f="web">Web</button>
+      <button class="fbtn" data-f="python">Python</button>
+      <button class="fbtn" data-f="db">Veritabanı</button>
+      <button class="fbtn" data-f="design">Tasarım</button>
+      <button class="fbtn" data-f="support">Destek</button>
+    </div>
+  </div>
 
   <!-- HİZMETLER -->
   <section class="services-section">
@@ -181,92 +205,15 @@
         <h2 class="section-title">Sunduğum Hizmetler</h2>
         <div class="section-line"></div>
       </div>
-
-      <div class="services-grid">
-
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-globe"></i></div>
-          <h3>Web Geliştirme</h3>
-          <p>Modern, responsive ve hızlı web siteleri geliştiriyorum. HTML, CSS, JavaScript ve PHP ile tam stack çözümler sunabiliyorum.</p>
-          <div class="service-features">
-            <div class="sf-item"><i class="fas fa-circle"></i> Responsive tasarım</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> SEO uyumlu yapı</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Hızlı yükleme süresi</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Modern UI/UX</div>
-          </div>
-          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon"><i class="fab fa-python"></i></div>
-          <h3>Python Geliştirme</h3>
-          <p>Otomasyon scriptleri, veri analizi araçları ve masaüstü uygulamaları geliştiriyorum. Pandas, Matplotlib ve Tkinter deneyimim var.</p>
-          <div class="service-features">
-            <div class="sf-item"><i class="fas fa-circle"></i> Otomasyon scriptleri</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Veri analizi & görselleştirme</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Web scraping</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Masaüstü uygulamaları</div>
-          </div>
-          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-database"></i></div>
-          <h3>Veritabanı Tasarımı</h3>
-          <p>MySQL ile veritabanı tasarımı ve yönetimi yapıyorum. İlişkisel veritabanı modelleme, SQL sorguları ve optimizasyon.</p>
-          <div class="service-features">
-            <div class="sf-item"><i class="fas fa-circle"></i> MySQL veritabanı</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Şema tasarımı</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Sorgu optimizasyonu</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> PHP entegrasyonu</div>
-          </div>
-          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-          <h3>Responsive Tasarım</h3>
-          <p>Tüm cihazlarda mükemmel görünen, mobil öncelikli tasarımlar oluşturuyorum. CSS Grid, Flexbox ve media queries kullanıyorum.</p>
-          <div class="service-features">
-            <div class="sf-item"><i class="fas fa-circle"></i> Mobil öncelikli</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Cross-browser uyumluluk</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Performans optimizasyonu</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Erişilebilirlik standartları</div>
-          </div>
-          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-bug"></i></div>
-          <h3>Kod İnceleme & Debug</h3>
-          <p>Mevcut kodunuzdaki hataları bulup düzeltiyorum. Kod kalitesini artırmak için inceleme ve iyileştirme önerileri sunuyorum.</p>
-          <div class="service-features">
-            <div class="sf-item"><i class="fas fa-circle"></i> Bug tespiti ve düzeltme</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Kod kalitesi analizi</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Performans iyileştirme</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Dokümantasyon</div>
-          </div>
-          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
-          <h3>Teknik Destek & Mentorluk</h3>
-          <p>Programlamayı öğrenmek isteyenlere temel konularda rehberlik ediyorum. Python, Java ve web teknolojilerinde pratik destek.</p>
-          <div class="service-features">
-            <div class="sf-item"><i class="fas fa-circle"></i> Temel programlama eğitimi</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Proje danışmanlığı</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Kod review</div>
-            <div class="sf-item"><i class="fas fa-circle"></i> Kariyer tavsiyesi</div>
-          </div>
-          <a href="contact.html" class="service-btn">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>
-        </div>
-
+      <div class="grid" id="grid">
+        <div class="sk"><div class="sk-i"></div><div class="sk-l s"></div><div class="sk-l f"></div><div class="sk-l m"></div></div>
+        <div class="sk"><div class="sk-i"></div><div class="sk-l s"></div><div class="sk-l f"></div><div class="sk-l m"></div></div>
+        <div class="sk"><div class="sk-i"></div><div class="sk-l s"></div><div class="sk-l f"></div><div class="sk-l m"></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ÇALIŞMA SÜRECİ -->
+  <!-- SÜREÇ -->
   <section class="process-section">
     <div class="container">
       <div class="section-header light">
@@ -274,27 +221,11 @@
         <h2 class="section-title">Çalışma Sürecim</h2>
         <div class="section-line"></div>
       </div>
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <h4>Keşif & Analiz</h4>
-          <p>Projenin ihtiyaçlarını anlamak için detaylı görüşme yapıyorum ve gereksinimler belirliyoruz.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <h4>Planlama</h4>
-          <p>Teknik yaklaşımı, kullanılacak teknolojileri ve zaman çizelgesini birlikte planlıyoruz.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <h4>Geliştirme</h4>
-          <p>Temiz, okunabilir ve iyi belgelenmiş kod yazarak projeyi adım adım hayata geçiriyorum.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">4</div>
-          <h4>Teslim & Destek</h4>
-          <p>Tamamlanan projeyi sunuyor, gerekli eğitimi verip ihtiyaç duyduğunuzda destek sağlıyorum.</p>
-        </div>
+      <div class="pgrid">
+        <div class="pstep"><div class="pnum">1</div><h4>Keşif & Analiz</h4><p>Projenin ihtiyaçlarını anlamak için detaylı görüşme yapıyorum.</p></div>
+        <div class="pstep"><div class="pnum">2</div><h4>Planlama</h4><p>Teknik yaklaşımı ve zaman çizelgesini birlikte planlıyoruz.</p></div>
+        <div class="pstep"><div class="pnum">3</div><h4>Geliştirme</h4><p>Temiz ve okunabilir kod yazarak projeyi hayata geçiriyorum.</p></div>
+        <div class="pstep"><div class="pnum">4</div><h4>Teslim & Destek</h4><p>Projeyi teslim ediyor, ihtiyaç halinde destek sağlıyorum.</p></div>
       </div>
     </div>
   </section>
@@ -306,8 +237,8 @@
         <h2>Birlikte Çalışalım mı?</h2>
         <p>Projeniz için en iyi çözümü bulmak üzere hemen iletişime geçin.</p>
         <div class="cta-btns">
-          <a href="contact.html" class="btn-white"><i class="fas fa-paper-plane"></i> İletişime Geç</a>
-          <a href="proje.html" class="btn-ghost"><i class="fas fa-eye"></i> Projelerimi Gör</a>
+          <a href="contact.html" class="btn-w"><i class="fas fa-paper-plane"></i> İletişime Geç</a>
+          <a href="projects.html" class="btn-g"><i class="fas fa-eye"></i> Projelerimi Gör</a>
         </div>
       </div>
     </div>
@@ -321,7 +252,163 @@
   </footer>
 
   <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+  <div class="toasts" id="toasts"></div>
+
+  <!-- Sadece main.js — interactions.js yüklenmeyecek (tilt/cursor sorunu) -->
   <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/interactions.js"></script>
+
+  <script>
+  (function () {
+    var KEY = 'sefabenli_favs';
+
+    /* localStorage */
+    function getFavs()    { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch(e) { return []; } }
+    function setFavs(f)   { localStorage.setItem(KEY, JSON.stringify(f)); }
+    function isFav(id)    { return getFavs().includes(id); }
+    function toggleFav(id){ var f=getFavs(); if(f.includes(id)){ setFavs(f.filter(function(x){return x!==id;})); return false; } f.push(id); setFavs(f); return true; }
+
+    /* Toast */
+    function toast(msg, cls) {
+      var c=document.getElementById('toasts');
+      var t=document.createElement('div');
+      t.className='toast '+cls;
+      t.innerHTML='<span class="ti"><i class="'+(cls==='add'?'fas fa-heart':cls==='rem'?'far fa-heart':'fas fa-trash-alt')+'"></i></span> '+msg;
+      c.appendChild(t);
+      setTimeout(function(){ t.classList.add('out'); setTimeout(function(){t.remove();},300); },2600);
+    }
+
+    /* Sayaç */
+    function updateCount() {
+      var n=getFavs().length;
+      document.getElementById('favCount').textContent=n;
+      document.getElementById('favLabel').textContent=n===0?'— kalp ikonuna tıklayarak ekleyin':'kayıtlı hizmet';
+    }
+
+    /* Filtre haritası */
+    var FM={all:[1,2,3,4,5,6],web:[1],python:[2],db:[3],design:[4],support:[5,6]};
+
+    var curFilter='all', onlyFavs=false;
+
+    function applyView(){
+      var cards=document.querySelectorAll('.card');
+      var allowed=FM[curFilter];
+      cards.forEach(function(c){
+        var id=parseInt(c.dataset.id);
+        c.classList.toggle('hidden',!(allowed.includes(id)&&(!onlyFavs||isFav(id))));
+      });
+      checkEmpty();
+    }
+
+    function checkEmpty(){
+      var grid=document.getElementById('grid');
+      var vis=grid.querySelectorAll('.card:not(.hidden)').length;
+      var em=grid.querySelector('.empty');
+      if(vis===0){
+        if(!em){ em=document.createElement('div'); em.className='empty show'; em.innerHTML='<i class="far fa-star"></i><h3>Favori bulunamadı</h3><p>Kalp ikonuna tıklayarak favorilere ekleyebilirsiniz.</p>'; grid.appendChild(em); }
+        else em.classList.add('show');
+      } else if(em){ em.classList.remove('show'); }
+    }
+
+    /* Kart oluştur */
+    function makeCard(s, delay) {
+      var faved=isFav(s.id);
+      var feats=s.features.map(function(f){ return '<div class="feat"><i class="fas fa-circle"></i>'+f+'</div>'; }).join('');
+      var badge=s.badge?'<span class="cbadge">'+s.badge+'</span>':'';
+
+      var d=document.createElement('div');
+      d.className='card'+(faved?' fav':'');
+      d.dataset.id=s.id;
+      d.style.opacity='0';
+      d.style.transform='translateY(18px)';
+      d.innerHTML=
+        badge+
+        '<div class="cicon"><i class="'+s.icon+'"></i></div>'+
+        '<h3>'+s.title+'</h3>'+
+        '<p>'+s.description+'</p>'+
+        '<div class="feats">'+feats+'</div>'+
+        '<p class="cprice"><i class="fas fa-tag"></i>'+s.price+'</p>'+
+        '<div class="cactions">'+
+          '<a href="contact.html" class="clink">Detay için iletişime geç <i class="fas fa-arrow-right"></i></a>'+
+          '<button class="cbtn'+(faved?' on':'')+'" data-id="'+s.id+'" title="'+(faved?'Favorilerden çıkar':'Favorilere ekle')+'">'+
+            '<i class="'+(faved?'fas':'far')+' fa-heart"></i>'+
+          '</button>'+
+        '</div>';
+
+      /* Animasyon */
+      setTimeout(function(){
+        d.style.transition='opacity .45s ease, transform .45s ease';
+        d.style.opacity='1';
+        d.style.transform='none';
+      }, delay);
+
+      /* Favori butonu */
+      d.querySelector('.cbtn').addEventListener('click', function(){
+        var id=parseInt(this.dataset.id);
+        var added=toggleFav(id);
+        this.classList.toggle('on',added);
+        this.querySelector('i').className=(added?'fas':'far')+' fa-heart';
+        this.title=added?'Favorilerden çıkar':'Favorilere ekle';
+        d.classList.toggle('fav',added);
+        updateCount();
+        toast(added?'"'+s.title+'" favorilere eklendi!':'"'+s.title+'" çıkarıldı.',added?'add':'rem');
+        if(onlyFavs&&!added){ d.classList.add('hidden'); checkEmpty(); }
+      });
+
+      return d;
+    }
+
+    /* JSON yükle */
+    function load(){
+      fetch('../data/services.json')
+        .then(function(r){ if(!r.ok)throw new Error(); return r.json(); })
+        .then(function(list){
+          var grid=document.getElementById('grid');
+          grid.innerHTML='';
+          list.forEach(function(s,i){ grid.appendChild(makeCard(s, i*80)); });
+          updateCount();
+          applyView();
+        })
+        .catch(function(){
+          document.getElementById('grid').innerHTML='<p style="grid-column:1/-1;text-align:center;color:#94a3b8;padding:40px">Yükleme hatası — sayfayı yenileyin.</p>';
+        });
+    }
+
+    /* Filtre butonları */
+    document.querySelectorAll('.fbtn').forEach(function(b){
+      b.addEventListener('click',function(){
+        document.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');});
+        this.classList.add('on');
+        curFilter=this.dataset.f;
+        applyView();
+      });
+    });
+
+    /* Favorileri göster */
+    document.getElementById('btnFavs').addEventListener('click',function(){
+      onlyFavs=!onlyFavs;
+      this.classList.toggle('on',onlyFavs);
+      this.innerHTML=onlyFavs?'<i class="fas fa-th"></i> Tümünü Göster':'<i class="fas fa-filter"></i> Favorileri Göster';
+      applyView();
+    });
+
+    /* Temizle */
+    document.getElementById('btnClr').addEventListener('click',function(){
+      var n=getFavs().length;
+      if(!n){ toast('Favori bulunmuyor.','rem'); return; }
+      setFavs([]);
+      updateCount();
+      document.querySelectorAll('.card').forEach(function(c){
+        c.classList.remove('fav');
+        var b=c.querySelector('.cbtn');
+        if(b){ b.classList.remove('on'); b.querySelector('i').className='far fa-heart'; b.title='Favorilere ekle'; }
+      });
+      if(onlyFavs){ onlyFavs=false; var bf=document.getElementById('btnFavs'); bf.classList.remove('on'); bf.innerHTML='<i class="fas fa-filter"></i> Favorileri Göster'; applyView(); }
+      toast(n+' favori temizlendi.','clr');
+    });
+
+    load();
+  })();
+  </script>
+
 </body>
 </html>
