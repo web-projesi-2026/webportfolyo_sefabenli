@@ -379,7 +379,7 @@
      =============================================================== */
   var CardTilt = {
     init: function () {
-      var sel = '.project-card, .service-card, .blog-card, .skills-category';
+      var sel = '.project-card, .blog-card, .skills-category';
       qsa(sel).forEach(function (card) {
         card.addEventListener('mousemove', function (e) {
           var r   = card.getBoundingClientRect();
